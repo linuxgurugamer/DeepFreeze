@@ -1813,7 +1813,7 @@ namespace DF
         private void OnDestroy()
         {
             //Remove GameEvent callbacks.
-            Debug.Log("DeepFreezer OnDestroy");
+            Debug.Log("DeepFreezerPart OnDestroy");
             
                 GameEvents.onCrewTransferPartListCreated.Remove(onCrewTransferPartListCreated);
                 GameEvents.onCrewTransferred.Remove(onCrewTransferred);
