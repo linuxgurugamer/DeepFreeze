@@ -194,7 +194,7 @@ namespace DF
         [KSPField(isPersistant = true)]
         public float timeSinceLastTmpChk; //This is the game time since Temperature was checked, for the ongoing storage of frozen kerbal's
 
-        [KSPField(isPersistant = true, guiName = "Freezer Out of EC", guiActive = true)]
+        [KSPField(isPersistant = true, guiName = "#autoLOC_DF_00207", guiActive = true)]  // Freezer Out of EC
         public bool _FreezerOutofEC;             // true if the freezer has run out of EC
 
         public bool DFIFreezerOutofEC                     //  Interface var for API = true if the freezer has run out of EC
