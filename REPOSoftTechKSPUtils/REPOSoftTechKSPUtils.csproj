@@ -38,7 +38,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="BackgroundResources">
-      <HintPath>R:\KSP\KSP_1.12.5-dev\GameData\REPOSoftTech\BackgroundResources\BackgroundResources.dll</HintPath>
+      <HintPath>$(KSPDIR)\GameData\REPOSoftTech\BackgroundResources\BackgroundResources.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
