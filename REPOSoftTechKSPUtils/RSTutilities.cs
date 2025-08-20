@@ -33,6 +33,8 @@ using Random = System.Random;
 
 namespace RSTUtils
 {
+	// Following not needed, it's imported from BackgroundUtils
+#if false
 	public enum GameState
 	{
 		FLIGHT = 0,
@@ -41,7 +43,7 @@ namespace RSTUtils
 		SPACECENTER = 3,
 		OTHER = 4
 	}
-
+#endif
 	
 	internal static class Utilities
 	{
@@ -897,9 +899,9 @@ namespace RSTUtils
 			}
 		}
 
-        #endregion Vessels
+		#endregion Vessels
 
-        #region CelestialBodies
+		#region CelestialBodies
 
         public static List<string> GetCelestialBodyNames()
         {
@@ -911,9 +913,9 @@ namespace RSTUtils
             return bodynames;
         }
 
-        #endregion
+		#endregion
 
-        #region Temperature
+		#region Temperature
         //Temperature
         internal static float KelvintoCelsius(float kelvin)
 		{
@@ -1557,6 +1559,6 @@ namespace RSTUtils
 				_AssemblyName);                                           // This adds our standardised wrapper to each line
 			Debug.Log(strMessageLine);                        // And this puts it in the log
 		}
-        #endregion Logging        
+		#endregion Logging        
     }    
 }
