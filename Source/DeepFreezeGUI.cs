@@ -49,7 +49,7 @@ namespace DF
         private Vector2 GUIscrollViewVector, GUIscrollViewVector2,// GUIscrollViewVectorSettings,
             GUIscrollViewVectorKAC, GUIscrollViewVectorKACKerbals = Vector2.zero;
         private bool mouseDownDF;
-        private bool mouseDownCF;
+        //private bool mouseDownCF;
         private bool mouseDownKAC;
         private float DFtxtWdthName;
         private float DFtxtWdthProf;
@@ -72,8 +72,8 @@ namespace DF
         private float DFvslRT;
 
         private bool showKACGUI;
-        private bool showConfigGUI;
-        private bool LoadConfig = true;
+        //private bool showConfigGUI;
+        //private bool LoadConfig = true;
         private bool ModKACAlarm;
         private KACWrapper.KACAPI.KACAlarm KACalarmMod;
         private List<string> KACAlarm_FrzKbls = new List<string>();
@@ -173,10 +173,10 @@ namespace DF
         private static void CacheLocalStrings()
         {
             cacheautoLOC_DF_00003 = Localizer.Format("#autoLOC_DF_00003"); //#autoLOC_DF_00003 = DeepFreeze
-            cacheautoLOC_DF_00009 = Localizer.Format("#autoLOC_DF_00004");
-            cacheautoLOC_DF_00009 = Localizer.Format("#autoLOC_DF_00005");
-            cacheautoLOC_DF_00009 = Localizer.Format("#autoLOC_DF_00006");
-            cacheautoLOC_DF_00009 = Localizer.Format("#autoLOC_DF_00007");
+            cacheautoLOC_DF_00004 = Localizer.Format("#autoLOC_DF_00004");
+            cacheautoLOC_DF_00005 = Localizer.Format("#autoLOC_DF_00005");
+            cacheautoLOC_DF_00006 = Localizer.Format("#autoLOC_DF_00006");
+            cacheautoLOC_DF_00007 = Localizer.Format("#autoLOC_DF_00007");
             cacheautoLOC_DF_00008 = Localizer.Format("#autoLOC_DF_00008"); //#autoLOC_DF_00008 = Close Window
             cacheautoLOC_DF_00009 = Localizer.Format("#autoLOC_DF_00009");
             cacheautoLOC_DF_00010 = Localizer.Format("#autoLOC_DF_00010");

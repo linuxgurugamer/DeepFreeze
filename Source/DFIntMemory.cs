@@ -71,7 +71,10 @@ namespace DF
         private int AllVslsErrorCount;                                  //stop log spam
         private List<string> ComakeysToDelete = new List<string>();
         private List<KeyValuePair<string, KerbalInfo>> comaKerbals = new List<KeyValuePair<string, KerbalInfo>>();
-        private double currentTime, lastFixedUpdateTime, checkVesselUpdateTime, checkVesselComaTime;
+        private double currentTime, lastFixedUpdateTime
+            //,checkVesselUpdateTime, 
+            //checkVesselComaTime
+            ;
         private List<DeepFreezer> TmpDpFrzrActVsl = new List<DeepFreezer>();
         private List<Vessel> allVessels = new List<Vessel>();
         private List<Guid> vesselsToDelete = new List<Guid>();

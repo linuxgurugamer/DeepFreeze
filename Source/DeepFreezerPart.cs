@@ -429,9 +429,9 @@ namespace DF
         internal bool partHasInternals;
         private bool partHasStripLights;
         private bool onvslchgInternal;  //set to true if a VesselChange game event is triggered by this module
-        private bool onvslchgExternal;  //set to true if a VesselChange game event is triggered outside of this module
-        private bool onvslchgNotActive; //sets a timer count started when external VesselChange game event is triggered before resetting cryopod and extdoor animations.
-        private float onvslchgNotActiveDelay; // timer as per previous var
+        //private bool onvslchgExternal;  //set to true if a VesselChange game event is triggered outside of this module
+        //private bool onvslchgNotActive; //sets a timer count started when external VesselChange game event is triggered before resetting cryopod and extdoor animations.
+        //private float onvslchgNotActiveDelay; // timer as per previous var
         private double ResAvail;
         private bool IsRTInstalled;
 
@@ -1311,7 +1311,7 @@ namespace DF
                                               // we need to check if we aren't going to exhaust all EC in one call.. and???
                         {
                             ECreqd = resTotal * 95 / 100;
-                            double ECtotal = 0f;
+                            //double ECtotal = 0f;
                             if (RSTUtils.Utilities.requireResource(vessel, EC, ECreqd, false, true, false, out ResAvail, out resTotal))
                             {
                                 RSTUtils.Utilities.requireResource(vessel, EC, ECreqd, true, true, false, out ResAvail, out resTotal);
