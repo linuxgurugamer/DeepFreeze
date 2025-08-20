@@ -120,7 +120,7 @@ namespace DF
 
         public override void OnAwake()
         {
-            Utilities.Log("OnAwake in " + HighLogic.LoadedScene);
+            RSTUtils.Utilities.Log("OnAwake in " + HighLogic.LoadedScene);
             base.OnAwake();
             
             GameEvents.onGameSceneLoadRequested.Add(OnGameSceneLoadRequested);
