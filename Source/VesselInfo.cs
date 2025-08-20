@@ -77,7 +77,7 @@ namespace DF
             node.TryGetValue("storedEC", ref info.storedEC);
             node.TryGetValue("predictedECOut", ref info.predictedECOut);
 
-            info.vesselType = Utilities.GetNodeValue(node, "vesselType", VesselType.Unknown);
+            info.vesselType = RSTUtils.Utilities.GetNodeValue(node, "vesselType", VesselType.Unknown);
             
             return info;
         }
