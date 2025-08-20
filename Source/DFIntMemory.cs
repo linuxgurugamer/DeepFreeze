@@ -980,7 +980,7 @@ namespace DF
                 }
                 else //vessel not loaded
                 {
-                    if ((DFInstalledMods.IsBGRInstalled || !Utilities.timewarpIsValid(5)) && DeepFreeze.Instance.DFsettings.backgroundresources)
+                    if ((DFInstalledMods.IsBGRInstalled || !RSTUtils.Utilities.timewarpIsValid(5)) && DeepFreeze.Instance.DFsettings.backgroundresources)
                     {
                         if (UnloadedResources.Instance != null)
                         {

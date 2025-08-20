@@ -1998,7 +1998,7 @@ namespace DF
                     #region Get EC for Freeze
                     RSTUtils.Utilities.Log_Debug("Freeze Step 1");                    
                     double ECTotal = 0f;
-                    if (!CheatOptions.InfiniteElectricity && !Utilities.requireResource(vessel, EC, ChargeRate, false, true, false, out ResAvail, out ECTotal))
+                    if (!CheatOptions.InfiniteElectricity && !RSTUtils.Utilities.requireResource(vessel, EC, ChargeRate, false, true, false, out ResAvail, out ECTotal))
                     {
                         ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00081"), 5.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00081 = Insufficient electric charge to freeze kerbal
                         FreezeKerbalAbort(ActiveFrzKerbal);
@@ -2225,7 +2225,7 @@ namespace DF
                 if (FreezerSpace > 0 && part.protoModuleCrew.Contains(CrewMember)) // Freezer has space? and Part contains the CrewMember?
                 {
                     double GlykTotal = 0f;
-                    if (!Utilities.requireResource(vessel, Glykerol, GlykerolRequired, false, true, false, out ResAvail, out GlykTotal)) // check we have Glykerol on board. 5 units per freeze event. This should be a part config item not hard coded.
+                    if (!RSTUtils.Utilities.requireResource(vessel, Glykerol, GlykerolRequired, false, true, false, out ResAvail, out GlykTotal)) // check we have Glykerol on board. 5 units per freeze event. This should be a part config item not hard coded.
                     {
                         ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00083"), 5.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00083 = Insufficient Glykerol to freeze kerbal
                     }
@@ -2555,7 +2555,7 @@ namespace DF
                         break;
                     }
                     double totalAvail = 0f;
-                    if (!CheatOptions.InfiniteElectricity && !Utilities.requireResource(vessel, EC, ChargeRate, false, true, false, out ResAvail, out totalAvail))
+                    if (!CheatOptions.InfiniteElectricity && !RSTUtils.Utilities.requireResource(vessel, EC, ChargeRate, false, true, false, out ResAvail, out totalAvail))
                     {
                         ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00094"), 5.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00094 = Insufficient electric charge to thaw kerbal
                         ThawKerbalAbort(ToThawKerbal);
