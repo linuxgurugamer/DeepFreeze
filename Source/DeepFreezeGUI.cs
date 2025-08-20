@@ -606,23 +606,23 @@ namespace DF
                         {
                             if (vsl.predictedECOut < DeepFreeze.Instance.DFsettings.EClowCriticalTime)
                             {
-                                GUILayout.Label(Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusRedStyle, GUILayout.Width(DFvslLstUpd));
+                                GUILayout.Label(RSTUtils.Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusRedStyle, GUILayout.Width(DFvslLstUpd));
                             }
                             else
                             {
                                 if (vsl.predictedECOut < DeepFreeze.Instance.DFsettings.ECLowWarningTime)
                                 {
-                                    GUILayout.Label(Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusWarnStyle, GUILayout.Width(DFvslLstUpd));
+                                    GUILayout.Label(RSTUtils.Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusWarnStyle, GUILayout.Width(DFvslLstUpd));
                                 }
                                 else
                                 {
-                                    GUILayout.Label(Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusOKStyle, GUILayout.Width(DFvslLstUpd));
+                                    GUILayout.Label(RSTUtils.Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusOKStyle, GUILayout.Width(DFvslLstUpd));
                                 }
                             }
                         }
                         else
                         {
-                            GUILayout.Label(Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusGrayStyle, GUILayout.Width(DFvslLstUpd));
+                            GUILayout.Label(RSTUtils.Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusGrayStyle, GUILayout.Width(DFvslLstUpd));
                         }
                     }
                 }
@@ -632,23 +632,23 @@ namespace DF
                     {
                         if (vsl.predictedECOut < DeepFreeze.Instance.DFsettings.EClowCriticalTime)
                         {
-                            GUILayout.Label(Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusRedStyle, GUILayout.Width(DFvslLstUpd));
+                            GUILayout.Label(RSTUtils.Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusRedStyle, GUILayout.Width(DFvslLstUpd));
                         }
                         else
                         {
                             if (vsl.predictedECOut < DeepFreeze.Instance.DFsettings.ECLowWarningTime)
                             {
-                                GUILayout.Label(Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusWarnStyle, GUILayout.Width(DFvslLstUpd));
+                                GUILayout.Label(RSTUtils.Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusWarnStyle, GUILayout.Width(DFvslLstUpd));
                             }
                             else
                             {
-                                GUILayout.Label(Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusOKStyle, GUILayout.Width(DFvslLstUpd));
+                                GUILayout.Label(RSTUtils.Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusOKStyle, GUILayout.Width(DFvslLstUpd));
                             }
                         }
                     }
                     else
                     {
-                        GUILayout.Label(Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusGrayStyle, GUILayout.Width(DFvslLstUpd));
+                        GUILayout.Label(RSTUtils.Utilities.FormatDateString(Planetarium.GetUniversalTime() - frzr.Value.timeLastElectricity), Textures.StatusGrayStyle, GUILayout.Width(DFvslLstUpd));
                     }
                 }
 
@@ -656,17 +656,17 @@ namespace DF
                 {
                     if (vsl.predictedECOut < DeepFreeze.Instance.DFsettings.EClowCriticalTime)
                     {
-                        GUILayout.Label(Utilities.FormatDateString(vsl.predictedECOut), Textures.StatusRedStyle, GUILayout.Width(DFvslLstUpd));
+                        GUILayout.Label(RSTUtils.Utilities.FormatDateString(vsl.predictedECOut), Textures.StatusRedStyle, GUILayout.Width(DFvslLstUpd));
                     }
                     else
                     {
                         if (vsl.predictedECOut < DeepFreeze.Instance.DFsettings.ECLowWarningTime)
                         {
-                            GUILayout.Label(Utilities.FormatDateString(vsl.predictedECOut), Textures.StatusWarnStyle, GUILayout.Width(DFvslLstUpd));
+                            GUILayout.Label(RSTUtils.Utilities.FormatDateString(vsl.predictedECOut), Textures.StatusWarnStyle, GUILayout.Width(DFvslLstUpd));
                         }
                         else
                         {
-                            GUILayout.Label(Utilities.FormatDateString(vsl.predictedECOut), Textures.StatusOKStyle, GUILayout.Width(DFvslLstUpd));
+                            GUILayout.Label(RSTUtils.Utilities.FormatDateString(vsl.predictedECOut), Textures.StatusOKStyle, GUILayout.Width(DFvslLstUpd));
                         }
                     }
                 }
@@ -867,13 +867,13 @@ namespace DF
                         {
                             GUILayout.Label(alarm.Name, Textures.StatusWarnStyle, GUILayout.Width(KACtxtWdthName));
                             GUILayout.Label(alarm.AlarmType.ToString(), Textures.StatusWarnStyle, GUILayout.Width(KACtxtWdthAtyp));
-                            GUILayout.Label(Utilities.FormatDateString(TmeRemaining), Textures.StatusWarnStyle, GUILayout.Width(KACtxtWdthATme));
+                            GUILayout.Label(RSTUtils.Utilities.FormatDateString(TmeRemaining), Textures.StatusWarnStyle, GUILayout.Width(KACtxtWdthATme));
                         }
                         else
                         {
                             GUILayout.Label(alarm.Name, Textures.statusStyle, GUILayout.Width(KACtxtWdthName));
                             GUILayout.Label(alarm.AlarmType.ToString(), Textures.statusStyle, GUILayout.Width(KACtxtWdthAtyp));
-                            GUILayout.Label(Utilities.FormatDateString(TmeRemaining), Textures.statusStyle, GUILayout.Width(KACtxtWdthATme));
+                            GUILayout.Label(RSTUtils.Utilities.FormatDateString(TmeRemaining), Textures.statusStyle, GUILayout.Width(KACtxtWdthATme));
                         }
                         // RSTUtils.Utilities.Log_Debug("Show alarm  from KAC " + alarm.ID + " " + alarm.Name + " " + alarm.VesselID);
 

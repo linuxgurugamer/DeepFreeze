@@ -696,7 +696,7 @@ namespace DF
                     if (IVAKerbalName != null) ScreenMessages.RemoveMessage(IVAKerbalName);
                     if (IVAkerbalPart != null) ScreenMessages.RemoveMessage(IVAkerbalPart);
                     if (IVAkerbalPod != null) ScreenMessages.RemoveMessage(IVAkerbalPod);
-                    if (Utilities.VesselIsInIVA(part.vessel))
+                    if (RSTUtils.Utilities.VesselIsInIVA(part.vessel))
                     {
                         // RSTUtils.Utilities.Log_Debug("Vessel is in IVA mode");
                         vesselisinIVA = true;
@@ -704,7 +704,7 @@ namespace DF
                         //Kerbal actkerbal = CameraManager.Instance.IVACameraActiveKerbal;
                         if (CameraManager.Instance.IVACameraActiveKerbal != null)
                         {
-                            if (Utilities.ActiveKerbalIsLocal(part))
+                            if (RSTUtils.Utilities.ActiveKerbalIsLocal(part))
                             {
                                 ProtoCrewMember crew = null;
                                 List<ProtoCrewMember>.Enumerator enumerator = part.protoModuleCrew.GetEnumerator();
@@ -748,7 +748,7 @@ namespace DF
                         if (IVAkerbalPod != null) ScreenMessages.RemoveMessage(IVAkerbalPod);
                         vesselisinIVA = false;
                         // RSTUtils.Utilities.Log_Debug("Vessel is NOT in IVA mode");
-                        if (Utilities.IsActiveVessel(vessel) && RSTUtils.Utilities.IsInInternal)
+                        if (RSTUtils.Utilities.IsActiveVessel(vessel) && RSTUtils.Utilities.IsInInternal)
                         {
                             vesselisinInternal = true;
                             if (TotalFrozen > 0 && !mon_beep.isPlaying && DeepFreeze.Instance.DFsettings.BeepSoundsActive)
@@ -1222,7 +1222,7 @@ namespace DF
                     Fields["FrznChargeRequired"].guiActive = true;
                     Fields["FrznChargeUsage"].guiActive = true;
                     Fields["_FreezerOutofEC"].guiActive = true;
-                    if (Utilities.timewarpIsValid(5))  // EC usage and generation still seems to work up to warpfactor of 4.
+                    if (RSTUtils.Utilities.timewarpIsValid(5))  // EC usage and generation still seems to work up to warpfactor of 4.
                     {
                         PartInfo partInfo;
                         if (!DeepFreeze.Instance.DFgameSettings.knownFreezerParts.TryGetValue(part.flightID, out partInfo))
@@ -1249,7 +1249,7 @@ namespace DF
                 if (DeepFreeze.Instance.DFsettings.RegTempReqd)
                 {
                     Fields["_FrzrTmp"].guiActive = true;
-                    if (Utilities.timewarpIsValid(2)) // Temperature is buggy in timewarp so it is disabled whenever timewarp is on.
+                    if (RSTUtils.Utilities.timewarpIsValid(2)) // Temperature is buggy in timewarp so it is disabled whenever timewarp is on.
                     {
                         PartInfo partInfo;
                         if (!DeepFreeze.Instance.DFgameSettings.knownFreezerParts.TryGetValue(part.flightID, out partInfo))
@@ -1293,7 +1293,7 @@ namespace DF
                     double ECreqd = FrznChargeRequired / 60.0f * timeperiod * TotalFrozen;
                     RSTUtils.Utilities.Log_Debug("DeepFreezer Running the freezer parms currenttime = {0} timeperiod = {1} ecreqd = {2}" , currenttime.ToString(), timeperiod.ToString(), ECreqd.ToString());
                     double resTotal = 0f;
-                    if (Utilities.requireResource(vessel, EC, ECreqd, false, true, false, out ResAvail, out resTotal))
+                    if (RSTUtils.Utilities.requireResource(vessel, EC, ECreqd, false, true, false, out ResAvail, out resTotal))
                     {
                         if (OnGoingECMsg != null) ScreenMessages.RemoveMessage(OnGoingECMsg);
                         //Have resource
@@ -1312,7 +1312,7 @@ namespace DF
                         {
                             ECreqd = resTotal * 95 / 100;
                             double ECtotal = 0f;
-                            if (Utilities.requireResource(vessel, EC, ECreqd, false, true, false, out ResAvail, out resTotal))
+                            if (RSTUtils.Utilities.requireResource(vessel, EC, ECreqd, false, true, false, out ResAvail, out resTotal))
                             {
                                 RSTUtils.Utilities.requireResource(vessel, EC, ECreqd, true, true, false, out ResAvail, out resTotal);
                                 FrznChargeUsage = (float)ResAvail;
@@ -2024,7 +2024,7 @@ namespace DF
                         if (StoredCharge >= ChargeRequired)
                         {
                             if (FreezeMsg != null) ScreenMessages.RemoveMessage(FreezeMsg);
-                            if (Utilities.requireResource(vessel, Glykerol, GlykerolRequired, true, true, false, out ResAvail, out ECTotal))
+                            if (RSTUtils.Utilities.requireResource(vessel, Glykerol, GlykerolRequired, true, true, false, out ResAvail, out ECTotal))
                             {
                                 charge_up.Stop(); // stop the sound effects
                                 FreezeStepInProgress = 2;
@@ -4597,7 +4597,7 @@ namespace DF
             // Calculate the time since last consumption of EC, then calculate the EC required and request it from BackgroundProcessing DLL.
             // If the vessel runs out of EC the DeepFreezeGUI class will handle notifying the user, not here.
             double currenttime = Planetarium.GetUniversalTime();
-            if (Utilities.timewarpIsValid(5))
+            if (RSTUtils.Utilities.timewarpIsValid(5))
             {
                 double timeperiod = currenttime - partInfo.timeLastElectricity;
                 if (timeperiod >= 1f && partInfo.numFrznCrew > 0) //We have frozen Kerbals, consume EC

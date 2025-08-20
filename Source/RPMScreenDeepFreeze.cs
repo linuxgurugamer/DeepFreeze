@@ -78,7 +78,7 @@ namespace DF
             lastCount = FlightLogger.eventLog.Count;
             if (lastCount > 0)
             {
-                string fullLog = Utilities.WordWrap(string.Join(Environment.NewLine, FlightLogger.eventLog.ToArray()), screenWidth);
+                string fullLog = RSTUtilities.Utilities.WordWrap(string.Join(Environment.NewLine, FlightLogger.eventLog.ToArray()), screenWidth);
                 var tempBuffer = fullLog.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 var screenBuffer = new string[activeScreenHeight];
                 if (tempBuffer.Length <= activeScreenHeight)

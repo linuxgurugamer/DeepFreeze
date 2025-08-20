@@ -169,7 +169,7 @@ namespace DF
             ChkActiveFrozenKerbals();
             DeepFreeze.Instance.DFgameSettings.DmpKnownFznKerbals();
             resetFreezerCams();
-            if (Utilities.GameModeisFlight)
+            if (RSTUtils.Utilities.GameModeisFlight)
             {
                 if (DFInstalledMods.IsTexReplacerInstalled)
                 {
@@ -378,7 +378,7 @@ namespace DF
                 if (IVAKerbalName != null) ScreenMessages.RemoveMessage(IVAKerbalName);
                 if (IVAkerbalPart != null) ScreenMessages.RemoveMessage(IVAkerbalPart);
                 if (IVAkerbalPod != null)  ScreenMessages.RemoveMessage(IVAkerbalPod);
-                if (Utilities.IsInInternal && ActFrzrCams.Count > 0)
+                if (RSTUtils.Utilities.IsInInternal && ActFrzrCams.Count > 0)
                 {
                     // Set Top Left messages for FreezerCam mode
 
