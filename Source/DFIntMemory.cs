@@ -238,7 +238,7 @@ namespace DF
                 return;
             //For some reason when we Freeze a Kerbal and switch to the Internal camera (if in IVA mode) the cameramanager gets stuck.
             //If the user hits the camera mode key while in Internal camera mode this will kick them out to flight
-            if (GameSettings.CAMERA_MODE.GetKeyDown() && Utilities.IsInInternal)
+            if (GameSettings.CAMERA_MODE.GetKeyDown() && RSTUtils.Utilities.IsInInternal)
             {
                 CameraManager.Instance.SetCameraFlight();
             }
@@ -255,10 +255,10 @@ namespace DF
             if (ActVslHasDpFrezr)
             {
                 //If user hits Modifier Key - D switch to freezer cams.
-                if (GameSettings.MODIFIER_KEY.GetKey() && Input.GetKeyDown(keyFrzrCam) && ActFrzrCams.Count > 0 && !Utilities.StockOverlayCamIsOn)
+                if (GameSettings.MODIFIER_KEY.GetKey() && Input.GetKeyDown(keyFrzrCam) && ActFrzrCams.Count > 0 && !RSTUtils.Utilities.StockOverlayCamIsOn)
                 {
                      RSTUtils.Utilities.Log_Debug("User hit InternalCamera modifier keys lastFrzrCam=" + lastFrzrCam);
-                    if (Utilities.IsInIVA)
+                    if (RSTUtils.Utilities.IsInIVA)
                     {
                          RSTUtils.Utilities.Log_Debug("Vessel is in IVA, looking for active kerbal");
                         Kerbal activeKerbal;
@@ -304,7 +304,7 @@ namespace DF
                 }
 
                 //If user hits n while we are in internal camera mode switch to the next freezer camera.
-                if (Input.GetKeyDown(keyNxtFrzrCam) && Utilities.IsInInternal)
+                if (Input.GetKeyDown(keyNxtFrzrCam) && RSTUtils.Utilities.IsInInternal)
                 {
                      RSTUtils.Utilities.Log_Debug("User hit InternalCamera nextCamera key lastFrzrCam=" + lastFrzrCam);
                     if ((lastFrzrCam == ActFrzrCams.Count - 1) || (lastFrzrCam > ActFrzrCams.Count))
@@ -340,7 +340,7 @@ namespace DF
                 }
 
                 //If user hits b while we are in internal camera mode switch to the previous freezer camera.
-                if (Input.GetKeyDown(keyPrvFrzrCam) && Utilities.IsInInternal)
+                if (Input.GetKeyDown(keyPrvFrzrCam) && RSTUtils.Utilities.IsInInternal)
                 {
                      RSTUtils.Utilities.Log_Debug("User hit InternalCamera prevCamera key lastFrzrCam=" + lastFrzrCam);
                     if (lastFrzrCam <= 0)

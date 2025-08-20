@@ -331,7 +331,7 @@ namespace DF
                 RSTUtils.Utilities.Log("Exception trying to run the Doorhandle animation");
                 RSTUtils.Utilities.Log("Err: " + ex);
             }
-            CRY_0300_Doors_Occluder = Utilities.SetInternalDepthMask(part, true, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
+            CRY_0300_Doors_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, true, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
             StartCoroutine(openDoors(1f));
         }
 
@@ -364,7 +364,7 @@ namespace DF
                 RSTUtils.Utilities.Log("Exception trying to run the Doorhandle animation");
                 RSTUtils.Utilities.Log("Err: " + ex);
             }
-            CRY_0300_Doors_Occluder = Utilities.SetInternalDepthMask(part, true, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
+            CRY_0300_Doors_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, true, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
             StartCoroutine(closeDoors(-1f));
         }
 
@@ -533,7 +533,7 @@ namespace DF
             {
                 RSTUtils.Utilities.Log("Part " + part.name + "(" + part.flightID + ") is loaded and internalModel has disappeared, so re-instantiate it");
                 //part.SpawnIVA();
-                Utilities.spawnInternal(part);
+                RSTUtils.Utilities.spawnInternal(part);
                 InternalModelCreated();
                 resetFrozenKerbals();
                 resetCryopods(true); 
@@ -579,10 +579,10 @@ namespace DF
                 return;
 
             //We need to update transprency settings if the user toggles the stock overlay camera. There is no game event for this.
-            if (IVAOverlaySetting != Utilities.StockOverlayCamIsOn)
+            if (IVAOverlaySetting != RSTUtils.Utilities.StockOverlayCamIsOn)
             {
                 OnATPPodSettingChanged(this.part, transparentPodSetting);
-                IVAOverlaySetting = Utilities.StockOverlayCamIsOn;
+                IVAOverlaySetting = RSTUtils.Utilities.StockOverlayCamIsOn;
             }
 
             //This is necessary to override stock crew xfer behaviour. When the user cancels the xfer the Stock highlighting system
@@ -609,7 +609,7 @@ namespace DF
                                     if (extwindowrenderer.material.shader != TransparentSpecularShader)
                                     {
                                         setCryopodWindowTransparent(i);
-                                        //External_Window_Occluder = Utilities.SetInternalDepthMask(part, false, "External_Window_Occluder", External_Window_Occluder);
+                                        //External_Window_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, false, "External_Window_Occluder", External_Window_Occluder);
                                     }
                                 }
                             }
@@ -618,7 +618,7 @@ namespace DF
                 }
             }
 
-            if (PartHasDoor && Utilities.IsInIVA)  //So if we are in IVA mode (inside this loop) and in a CRY-0300 (have External door) Open the Kerbals EYES WIDER!
+            if (PartHasDoor && RSTUtils.Utilities.IsInIVA)  //So if we are in IVA mode (inside this loop) and in a CRY-0300 (have External door) Open the Kerbals EYES WIDER!
             {
                 //Kerbal currentKerbal = CameraManager.Instance.IVACameraActiveKerbal;
                 CameraManager.Instance.IVACameraActiveKerbal.kerbalCam.nearClipPlane = 0.01f;
@@ -627,7 +627,7 @@ namespace DF
                 //Turn OFF the Door occluders so we can see outside.
                 //if (_externaldoorstate != DoorState.OPEN)
                 //{
-                //    CRY_0300_Doors_Occluder = Utilities.SetInternalDepthMask(part, false, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
+                //    CRY_0300_Doors_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, false, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
                 //}
             }
 
@@ -648,7 +648,7 @@ namespace DF
                     else
                     {
                         Fields["CabinTemp"].guiUnits = Localizer.Format("#autoLOC_DF_00070"); //#autoLOC_DF_00070 = C
-                        CabinTemp = Utilities.KelvintoCelsius((float)part.temperature);
+                        CabinTemp = RSTUtils.Utilities.KelvintoCelsius((float)part.temperature);
                     }
 
                     // If RemoteTech installed set the connection status
@@ -748,7 +748,7 @@ namespace DF
                         if (IVAkerbalPod != null) ScreenMessages.RemoveMessage(IVAkerbalPod);
                         vesselisinIVA = false;
                         // RSTUtils.Utilities.Log_Debug("Vessel is NOT in IVA mode");
-                        if (Utilities.IsActiveVessel(vessel) && Utilities.IsInInternal)
+                        if (Utilities.IsActiveVessel(vessel) && RSTUtils.Utilities.IsInInternal)
                         {
                             vesselisinInternal = true;
                             if (TotalFrozen > 0 && !mon_beep.isPlaying && DeepFreeze.Instance.DFsettings.BeepSoundsActive)
@@ -949,7 +949,7 @@ namespace DF
             try
             {
                 //We have to process the occluders for the CRY-0300 and CRY-0300R for KSP 1.1
-                if (HighLogic.LoadedSceneIsFlight && !Utilities.IsInIVA)
+                if (HighLogic.LoadedSceneIsFlight && !RSTUtils.Utilities.IsInIVA)
                 {
                     //Only proceed if we have a TransparentPodPartModule.
                     if (JSITransparentPodModule != null && JSIATPtransparentPodSetting != null)
@@ -960,13 +960,13 @@ namespace DF
                         {
                             //If Stock Overlay is on we turn the Occluder OFF so we can see inside.
                             //Otherwise we see the closed/closing/opening doors.
-                            if (Utilities.StockOverlayCamIsOn)
+                            if (RSTUtils.Utilities.StockOverlayCamIsOn)
                             {
-                                CRY_0300_Doors_Occluder = Utilities.SetInternalDepthMask(part, false, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
+                                CRY_0300_Doors_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, false, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
                             }
                             else
                             {
-                                CRY_0300_Doors_Occluder = Utilities.SetInternalDepthMask(part, true, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
+                                CRY_0300_Doors_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, true, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
                             }
                         }
                         else if (isPodExternal) //CRY-0300R
@@ -979,11 +979,11 @@ namespace DF
                                 return;
                             if (!cryopodstateclosed[0] && transparentPodSetting == "ON") //No frozen kerbal inside
                             {
-                                External_Window_Occluder = Utilities.SetInternalDepthMask(part, false, "External_Window_Occluder", External_Window_Occluder);
+                                External_Window_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, false, "External_Window_Occluder", External_Window_Occluder);
                             }
                             else //Frozen kerbal inside or OFF or AUTO model.
                             {
-                                External_Window_Occluder = Utilities.SetInternalDepthMask(part, true, "External_Window_Occluder", External_Window_Occluder);
+                                External_Window_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, true, "External_Window_Occluder", External_Window_Occluder);
                             }
                         }
                     }
@@ -1006,19 +1006,19 @@ namespace DF
             {
                 //If RPM is not installed we need to set the depthshader occluders for the stock overlay processing.
                 //We have to process the occluders for the CRY-0300 and CRY-0300R for KSP 1.1
-                if (HighLogic.LoadedSceneIsFlight && !Utilities.IsInIVA)
+                if (HighLogic.LoadedSceneIsFlight && !RSTUtils.Utilities.IsInIVA)
                 {
                     if (PartHasDoor)  //If CRY-0300, set the door occluder ON so we see the closed/closing doors
                     {
                         //If Stock Overlay is on we turn the Occluder OFF so we can see inside.
                         //Otherwise is it ON.
-                        if (Utilities.StockOverlayCamIsOn)
+                        if (RSTUtils.Utilities.StockOverlayCamIsOn)
                         {
-                            CRY_0300_Doors_Occluder = Utilities.SetInternalDepthMask(part, false, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
+                            CRY_0300_Doors_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, false, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
                         }
                         else
                         {
-                            CRY_0300_Doors_Occluder = Utilities.SetInternalDepthMask(part, true, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
+                            CRY_0300_Doors_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, true, "CRY_0300_Doors_Occluder", CRY_0300_Doors_Occluder);
                         }
                     }
                     else if (isPodExternal) //CRY-0300R
@@ -1030,12 +1030,12 @@ namespace DF
                         
                         if (!cryopodstateclosed[0] && (!IsThawActive || !IsFreezeActive)) //No frozen kerbal inside
                         {
-                            External_Window_Occluder = Utilities.SetInternalDepthMask(part, false, "External_Window_Occluder", External_Window_Occluder);
+                            External_Window_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, false, "External_Window_Occluder", External_Window_Occluder);
 
                         }
                         else  //Frozen kerbal inside or freeze/thaw occuring. Can't see inside.
                         {
-                            External_Window_Occluder = Utilities.SetInternalDepthMask(part, true, "External_Window_Occluder", External_Window_Occluder);
+                            External_Window_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, true, "External_Window_Occluder", External_Window_Occluder);
                         }
                     }
                 }
@@ -1066,7 +1066,7 @@ namespace DF
             if (DFInstalledMods.IsJSITransparentPodsInstalled && part.Modules.Contains("JSIAdvTransparentPod"))
             {
                 JSITransparentPodModule = part.Modules["JSIAdvTransparentPod"];
-                JSIATPtransparentPodSetting = Utilities.GetFieldObject(JSITransparentPodModule, "transparentPodSetting");
+                JSIATPtransparentPodSetting = RSTUtils.Utilities.GetFieldObject(JSITransparentPodModule, "transparentPodSetting");
                 GetTransparentPodSetting();
             }
 
@@ -1107,7 +1107,7 @@ namespace DF
             if (HighLogic.LoadedSceneIsFlight && FlightGlobals.ready && vessel.loaded && partHasInternals && part.internalModel == null)
             {
                 RSTUtils.Utilities.Log("Part " + part.name + "(" + part.flightID + ") is loaded and internalModel has disappeared, so re-instantiate it");
-                Utilities.spawnInternal(part);
+                RSTUtils.Utilities.spawnInternal(part);
                 StartCoroutine(UnregisterPortraits());
             }
 
@@ -1124,7 +1124,7 @@ namespace DF
             {
                 if (crew.KerbalRef != null)
                 {
-                    Utilities.subdueIVAKerbalAnimations(crew.KerbalRef);
+                    RSTUtils.Utilities.subdueIVAKerbalAnimations(crew.KerbalRef);
                 }
             }
 
@@ -1171,7 +1171,7 @@ namespace DF
             cryopodEvents = new CryopodEvents(part, this);
             cryopodEvents.SyncEvents();
             OnATPPodSettingChanged(this.part, transparentPodSetting);
-            IVAOverlaySetting = Utilities.StockOverlayCamIsOn;
+            IVAOverlaySetting = RSTUtils.Utilities.StockOverlayCamIsOn;
             setGameSettings = true; //set the flag so this method doesn't execute a second time
         }
 
@@ -1297,7 +1297,7 @@ namespace DF
                     {
                         if (OnGoingECMsg != null) ScreenMessages.RemoveMessage(OnGoingECMsg);
                         //Have resource
-                        Utilities.requireResource(vessel, EC, ECreqd, true, true, false, out ResAvail, out resTotal);
+                        RSTUtils.Utilities.requireResource(vessel, EC, ECreqd, true, true, false, out ResAvail, out resTotal);
                         FrznChargeUsage = (float)ResAvail;
                         RSTUtils.Utilities.Log_Debug("DeepFreezer Consumed Freezer EC " + ECreqd + " units");
                         timeSinceLastECtaken = (float)currenttime;
@@ -1314,7 +1314,7 @@ namespace DF
                             double ECtotal = 0f;
                             if (Utilities.requireResource(vessel, EC, ECreqd, false, true, false, out ResAvail, out resTotal))
                             {
-                                Utilities.requireResource(vessel, EC, ECreqd, true, true, false, out ResAvail, out resTotal);
+                                RSTUtils.Utilities.requireResource(vessel, EC, ECreqd, true, true, false, out ResAvail, out resTotal);
                                 FrznChargeUsage = (float)ResAvail;
                                 timeSinceLastECtaken = (float)currenttime;
                                 deathCounter = currenttime;
@@ -1323,7 +1323,7 @@ namespace DF
                         //Debug.Log("DeepFreezer Ran out of EC to run the freezer");
                         if (!partInfo.ECWarning)
                         {
-                            if (TimeWarp.CurrentRateIndex > 1) Utilities.stopWarp();
+                            if (TimeWarp.CurrentRateIndex > 1) RSTUtils.Utilities.stopWarp();
                             ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00072"), 10.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00072 = Insufficient electric charge to monitor frozen kerbals.
                             partInfo.ECWarning = true;
                             deathCounter = currenttime;
@@ -1430,7 +1430,7 @@ namespace DF
                         Debug.Log("DeepFreezer Part Temp TOO HOT, Kerbals are going to melt parttemp=" + part.temperature);
                         if (!partInfo.TempWarning)
                         {
-                            if (TimeWarp.CurrentRateIndex > 1) Utilities.stopWarp();
+                            if (TimeWarp.CurrentRateIndex > 1) RSTUtils.Utilities.stopWarp();
                             ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00077"), 10.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00077 = Temperature getting too hot for kerbals to remain frozen.
                             partInfo.TempWarning = true;
                         }
@@ -1524,7 +1524,7 @@ namespace DF
                 }
                 if (isPodExternal && hasJSITransparentPod && part.internalModel != null)
                 {
-                    External_Window_Occluder = Utilities.FindInChildren(part.internalModel.transform, "External_Window_Occluder");
+                    External_Window_Occluder = RSTUtils.Utilities.FindInChildren(part.internalModel.transform, "External_Window_Occluder");
                     if (External_Window_Occluder != null && TransparentSpecularShader != null && depthMaskShader != null)
                     {
                         Renderer[] renderers = External_Window_Occluder.GetComponentsInChildren<Renderer>();
@@ -2011,7 +2011,7 @@ namespace DF
                         }
                         else
                         {
-                            Utilities.requireResource(vessel, EC, ChargeRate, true, true, false, out ResAvail, out ECTotal);
+                            RSTUtils.Utilities.requireResource(vessel, EC, ChargeRate, true, true, false, out ResAvail, out ECTotal);
                         }
                         StoredCharge = StoredCharge + ChargeRate;
                         if (FreezeMsg != null) ScreenMessages.RemoveMessage(FreezeMsg);
@@ -2296,7 +2296,7 @@ namespace DF
             ActiveFrzKerbal = CrewMember; // set the Active Freeze Kerbal
             ToFrzeKerbal = CrewMember.name;  // set the Active Freeze Kerbal name
             RSTUtils.Utilities.Log_Debug("FreezeKerbal " + CrewMember.name);
-            Utilities.dmpKerbalRefs(null, partHasInternals ? part.internalModel.seats[CrewMember.seatIdx].kerbalRef : null, CrewMember.KerbalRef);
+            RSTUtils.Utilities.dmpKerbalRefs(null, partHasInternals ? part.internalModel.seats[CrewMember.seatIdx].kerbalRef : null, CrewMember.KerbalRef);
             if (partHasInternals)
                 RSTUtils.Utilities.Log_Debug("Seatindx=" + CrewMember.seatIdx + ",Seatname=" + CrewMember.seat.seatTransformName);
             try
@@ -2335,7 +2335,7 @@ namespace DF
             {
                 RSTUtils.Utilities.Log_Debug("FreezeKerbalAbort " + CrewMember.name + " seat " + ToFrzeKerbalSeat);
                 ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00092"), 5.0f, ScreenMessageStyle.UPPER_CENTER); //autoLOC_DF_00092 = Freezing Aborted
-                Utilities.setFrznKerbalLayer(part, CrewMember, true);
+                RSTUtils.Utilities.setFrznKerbalLayer(part, CrewMember, true);
                 if (partHasInternals)
                 {
                     if (vesselisinIVA || vesselisinInternal)
@@ -2394,7 +2394,7 @@ namespace DF
             //Make them invisible
             if (partHasInternals)
             {
-                Utilities.setFrznKerbalLayer(part, CrewMember, false);
+                RSTUtils.Utilities.setFrznKerbalLayer(part, CrewMember, false);
             }
             //Remove them
             if (!RemoveKerbal(CrewMember, ToFrzeKerbalSeat))
@@ -2564,7 +2564,7 @@ namespace DF
                     {
                         if (!CheatOptions.InfiniteElectricity)
                         {
-                            Utilities.requireResource(vessel, EC, ChargeRate, true, true, false, out ResAvail, out totalAvail);
+                            RSTUtils.Utilities.requireResource(vessel, EC, ChargeRate, true, true, false, out ResAvail, out totalAvail);
                         }
                         StoredCharge = StoredCharge + ChargeRate;
                         if (ThawMsg != null) ScreenMessages.RemoveMessage(ThawMsg);
@@ -2858,9 +2858,9 @@ namespace DF
                                     codestep = 1;
                                     if (kerbal.KerbalRef != null)
                                     {
-                                        Utilities.subdueIVAKerbalAnimations(kerbal.KerbalRef);
+                                        RSTUtils.Utilities.subdueIVAKerbalAnimations(kerbal.KerbalRef);
                                     }
-                                    Utilities.setFrznKerbalLayer(part, kerbal, true);  //Set the Kerbal renderer layers on so they are visible again.
+                                    RSTUtils.Utilities.setFrznKerbalLayer(part, kerbal, true);  //Set the Kerbal renderer layers on so they are visible again.
                                     kerbal.KerbalRef.InPart = part; //Put their kerbalref back in the part.
                                     kerbal.KerbalRef.rosterStatus = ProtoCrewMember.RosterStatus.Assigned;
                                     codestep = 2;
@@ -2892,11 +2892,11 @@ namespace DF
                                         //now set the helmet state depending on the external door state.
                                         if (_externaldoorstate == DoorState.CLOSED)
                                         {
-                                            Utilities.setHelmetshaders(kerbal.KerbalRef, false);
+                                            RSTUtils.Utilities.setHelmetshaders(kerbal.KerbalRef, false);
                                         }
                                         else
                                         {
-                                            Utilities.setHelmetshaders(kerbal.KerbalRef, true);
+                                            RSTUtils.Utilities.setHelmetshaders(kerbal.KerbalRef, true);
                                         }
                                     }
                                      RSTUtils.Utilities.Log_Debug("Finishing ThawKerbalStep0");
@@ -2939,9 +2939,9 @@ namespace DF
                                 setseatstaticoverlay(part.internalModel.seats[tmpcrew.SeatIdx]);
                                 if (kerbal.KerbalRef != null)
                                 {
-                                    Utilities.subdueIVAKerbalAnimations(kerbal.KerbalRef);
+                                    RSTUtils.Utilities.subdueIVAKerbalAnimations(kerbal.KerbalRef);
                                 }
-                                Utilities.setFrznKerbalLayer(part, kerbal, true);  //Set the Kerbal renderer layers on so they are visible again.
+                                RSTUtils.Utilities.setFrznKerbalLayer(part, kerbal, true);  //Set the Kerbal renderer layers on so they are visible again.
                                 kerbal.KerbalRef.InPart = part; //Put their kerbalref back in the part.
                                 kerbal.KerbalRef.rosterStatus = ProtoCrewMember.RosterStatus.Assigned;
                                 codestep = 2;
@@ -2972,11 +2972,11 @@ namespace DF
                                     //now set the helmet state depending on the external door state.
                                     if (_externaldoorstate == DoorState.CLOSED)
                                     {
-                                        Utilities.setHelmetshaders(kerbal.KerbalRef, true);
+                                        RSTUtils.Utilities.setHelmetshaders(kerbal.KerbalRef, true);
                                     }
                                     else
                                     {
-                                        Utilities.setHelmetshaders(kerbal.KerbalRef, true);
+                                        RSTUtils.Utilities.setHelmetshaders(kerbal.KerbalRef, true);
                                     }
                                 }
                                  RSTUtils.Utilities.Log_Debug("Finishing ThawKerbalStep0");
@@ -3094,7 +3094,7 @@ namespace DF
                 }
             }
             //Make them invisible again
-            Utilities.setFrznKerbalLayer(part, kerbal, false);
+            RSTUtils.Utilities.setFrznKerbalLayer(part, kerbal, false);
             if (ThawMsg != null) ScreenMessages.RemoveMessage(ThawMsg);
             CrewHatchController.fetch.EnableInterface();
             if (DFGameEvents.onKerbalThawAbort != null)
@@ -3267,7 +3267,7 @@ namespace DF
                     return false;
                 }
                 if (partHasInternals && ExternalDoorActive)
-                    Utilities.setHelmetshaders(kerbal.KerbalRef, true);
+                    RSTUtils.Utilities.setHelmetshaders(kerbal.KerbalRef, true);
                 // remove the CrewMember from the part crewlist and unregister their traits, because they are frozen, and this is the only way to trick the game.
                 kerbal.UnregisterExperienceTraits(part);
                 part.protoModuleCrew.Remove(kerbal);
@@ -3353,7 +3353,7 @@ namespace DF
                     return false;
                 }
                 if (partHasInternals && ExternalDoorActive)
-                    Utilities.setHelmetshaders(kerbal.KerbalRef, true);
+                    RSTUtils.Utilities.setHelmetshaders(kerbal.KerbalRef, true);
 
                 // Set our newly thawed Popsicle, er Kerbal, to Original type and Assigned status.
                 kerbal.type = originaltype;
@@ -3739,7 +3739,7 @@ namespace DF
                             }
                             seatTakenbyFrznKerbal[crewmember.seatIdx] = true;
                             //setup seat and part settings for frozen kerbal.
-                            Utilities.setFrznKerbalLayer(part, crewmember, false);
+                            RSTUtils.Utilities.setFrznKerbalLayer(part, crewmember, false);
                             part.internalModel.seats[crewmember.seatIdx].taken = true;
                             part.internalModel.seats[crewmember.seatIdx].kerbalRef = crewmember.KerbalRef;
                             part.internalModel.seats[crewmember.seatIdx].crew = crewmember;
@@ -3855,7 +3855,7 @@ namespace DF
                                 }
                                 //Remove them from the GUIManager Portrait cams.
                                 DFPortraits.DestroyPortrait(kerbal.KerbalRef);
-                                Utilities.setFrznKerbalLayer(part, kerbal, false);  // Double check kerbal is invisible.
+                                RSTUtils.Utilities.setFrznKerbalLayer(part, kerbal, false);  // Double check kerbal is invisible.
                             }
                         }
                     }
@@ -4045,7 +4045,7 @@ namespace DF
             
             if (isPodExternal)
             {
-                External_Window_Occluder = Utilities.SetInternalDepthMask(part, true, "External_Window_Occluder", External_Window_Occluder); //Set window occluder off
+                External_Window_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, true, "External_Window_Occluder", External_Window_Occluder); //Set window occluder off
                 if (External_Window_Occluder_Renderer != null && External_Window_Material_Depth != null && External_Window_Material_Ice != null)
                 {
                     External_Window_Occluder_Renderer.material = External_Window_Material_Ice;
@@ -4221,7 +4221,7 @@ namespace DF
 
             if (isPodExternal)
             {
-                External_Window_Occluder = Utilities.SetInternalDepthMask(part, true, "External_Window_Occluder"); //Set window occluder visible (block internals)
+                External_Window_Occluder = RSTUtils.Utilities.SetInternalDepthMask(part, true, "External_Window_Occluder"); //Set window occluder visible (block internals)
                 if (External_Window_Occluder_Renderer != null && External_Window_Material_Depth != null && External_Window_Material_Ice != null)
                 {
                     External_Window_Occluder_Renderer.material = External_Window_Material_Ice;
@@ -4392,7 +4392,7 @@ namespace DF
                 {
                     yield return null;
                 }
-                //yield return Utilities.WaitForAnimation(externalDoorAnim, animationName);
+                //yield return RSTUtils.Utilities.WaitForAnimation(externalDoorAnim, animationName);
             }
             Events["eventCloseDoors"].active = true;
             _prevexterndoorstate = _externaldoorstate;
@@ -4420,7 +4420,7 @@ namespace DF
                 {
                     yield return null;
                 }
-                //yield return Utilities.WaitForAnimation(externalDoorAnim, animationName);
+                //yield return RSTUtils.Utilities.WaitForAnimation(externalDoorAnim, animationName);
             }
             Events["eventOpenDoors"].active = true;
             _prevexterndoorstate = _externaldoorstate;

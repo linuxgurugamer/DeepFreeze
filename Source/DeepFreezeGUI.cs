@@ -258,10 +258,10 @@ namespace DF
         {
             RSTUtils.Utilities.Log_Debug("DeepFreezeGUI startup");
             CacheLocalStrings();
-            windowID = Utilities.getnextrandomInt();
-            KACwindowID = Utilities.getnextrandomInt();
-            VSwindowID = Utilities.getnextrandomInt();
-            VSFwindowID = Utilities.getnextrandomInt();
+            windowID = RSTUtils.Utilities.getnextrandomInt();
+            KACwindowID = RSTUtils.Utilities.getnextrandomInt();
+            VSwindowID = RSTUtils.Utilities.getnextrandomInt();
+            VSFwindowID = RSTUtils.Utilities.getnextrandomInt();
 
             DFwindowPos = new Rect(40, Screen.height / 2 - 100, DFWINDOW_WIDTH, WINDOW_BASE_HEIGHT);
             DFKACwindowPos = new Rect(600, Screen.height / 2 - 100, KACWINDOW_WIDTH, WINDOW_BASE_HEIGHT);
@@ -289,7 +289,7 @@ namespace DF
 
             Useapplauncher = DeepFreeze.Instance.DFsettings.UseAppLauncher;
 
-            Utilities.setScaledScreen();
+            RSTUtils.Utilities.setScaledScreen();
             
             DFMenuAppLToolBar = new AppLauncherToolBar("DeepFreeze", cacheautoLOC_DF_00003,
                 "REPOSoftTech/DeepFreeze/Icons/DFtoolbar",
@@ -332,7 +332,7 @@ namespace DF
             {
                 //Jump to vessel code here.
                 switchNextUpdate = false;
-                int intVesselidx = Utilities.getVesselIdx(switchVessel);
+                int intVesselidx = RSTUtils.Utilities.getVesselIdx(switchVessel);
                 if (intVesselidx < 0)
                 {
                     RSTUtils.Utilities.Log("Couldn't find the index for the vessel " + switchVessel.vesselName + "(" +
@@ -428,7 +428,7 @@ namespace DF
             }
 
             if (DeepFreeze.Instance.DFsettings.ToolTips)
-                Utilities.DrawToolTip();
+                RSTUtils.Utilities.DrawToolTip();
         }
         
         private void windowDF(int id)
@@ -473,7 +473,7 @@ namespace DF
                 }
                 else
                 {
-                    TempVar = Localizer.Format("#autoLOC_DF_00048", Utilities.KelvintoCelsius(frzr.Value.cabinTemp).ToString("###0")); //"C"
+                    TempVar = Localizer.Format("#autoLOC_DF_00048", RSTUtils.Utilities.KelvintoCelsius(frzr.Value.cabinTemp).ToString("###0")); //"C"
                 }
 
                 if (DeepFreeze.Instance.DFsettings.RegTempReqd && !chgECHeatsettings)
@@ -817,7 +817,7 @@ namespace DF
             HandleResizeEventsDF(resizeRect);
 
             if (DeepFreeze.Instance.DFsettings.ToolTips)
-                Utilities.SetTooltipText();
+                RSTUtils.Utilities.SetTooltipText();
 
             GUI.DragWindow();
         }
@@ -1076,7 +1076,7 @@ namespace DF
             
             HandleResizeEventsKAC(resizeRect);
             if (DeepFreeze.Instance.DFsettings.ToolTips)
-                Utilities.SetTooltipText();
+                RSTUtils.Utilities.SetTooltipText();
             GUI.DragWindow();
         }
 
@@ -1112,7 +1112,7 @@ namespace DF
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
             if (DeepFreeze.Instance.DFsettings.ToolTips)
-                Utilities.SetTooltipText();
+                RSTUtils.Utilities.SetTooltipText();
             GUI.DragWindow();
         }
 
@@ -1140,7 +1140,7 @@ namespace DF
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
             if (DeepFreeze.Instance.DFsettings.ToolTips)
-                Utilities.SetTooltipText();
+                RSTUtils.Utilities.SetTooltipText();
             GUI.DragWindow();
         }
 
