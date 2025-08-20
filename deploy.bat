@@ -20,7 +20,7 @@ set DP0=r:\dp0\kspdev
 copy /Y "%1%2" "%PLUGINS%"
 copy /Y "%1%3".pdb "%PLUGINS%""
 
-copy /Y %VERSIONFILE% %GAMEDATA%\%GAMEDIR%
+copy /Y %VERSIONFILE% %GAMEDATA%\%REPODIR%\%GAMEDIR%
 
 xcopy /y /s /I %GAMEDATA%\%REPODIR% "%H%\GameData\%REPODIR%"
 xcopy /y /s /I %GAMEDATA%\%REPODIR% "%DP0%\GameData\%REPODIR%"
