@@ -28,7 +28,7 @@ namespace DF
             Instance = this;
             Textures.LoadIconAssets();
             DontDestroyOnLoad(this);
-            //Utilities.Log("DeepFreeze LoadGlobals Awake Complete");
+            //RSTUtils.Utilities.Log("DeepFreeze LoadGlobals Awake Complete");
         }
 
         public void Start()
@@ -58,9 +58,9 @@ namespace DF
         {
             try
             {
-                //Utilities.Log("DeepFreeze AssemblyFolder = " + DeepFreeze._AssemblyFolder);
-                //Utilities.Log("PathIconsPath = " + PathIconsPath);
-                //Utilities.Log("PathToolbarIconsPath = " + PathToolbarIconsPath);
+                //RSTUtils.Utilities.Log("DeepFreeze AssemblyFolder = " + DeepFreeze._AssemblyFolder);
+                //RSTUtils.Utilities.Log("PathIconsPath = " + PathIconsPath);
+                //RSTUtils.Utilities.Log("PathToolbarIconsPath = " + PathToolbarIconsPath);
                 LoadImageFromFile(ref TooltipBox, "DFToolTipBox.png", PathIconsPath);
                 LoadImageFromFile(ref BtnRedCross, "DFbtnRedCross.png", PathIconsPath);
                 LoadImageFromFile(ref BtnResize, "DFbtnResize.png", PathIconsPath);
@@ -121,7 +121,7 @@ namespace DF
 
             //Init styles
 
-            Utilities._TooltipStyle = new GUIStyle(GUI.skin.label)
+            RSTUtils.Utilities._TooltipStyle = new GUIStyle(GUI.skin.label)
             {
                 fontSize = 12,
                 fontStyle = FontStyle.Normal,
@@ -131,9 +131,9 @@ namespace DF
                 padding = new RectOffset(4, 4, 6, 4),
                 alignment = TextAnchor.MiddleCenter
             };
-            Utilities._TooltipStyle.normal.background = Textures.TooltipBox;
-            Utilities._TooltipStyle.normal.textColor = new Color32(207, 207, 207, 255);
-            Utilities._TooltipStyle.hover.textColor = Color.blue;
+            RSTUtils.Utilities._TooltipStyle.normal.background = Textures.TooltipBox;
+            RSTUtils.Utilities._TooltipStyle.normal.textColor = new Color32(207, 207, 207, 255);
+            RSTUtils.Utilities._TooltipStyle.hover.textColor = Color.blue;
             
             ClosebtnStyle = new GUIStyle(GUI.skin.button)
             {
@@ -145,7 +145,7 @@ namespace DF
             };
             ClosebtnStyle.active.background = GUI.skin.toggle.onNormal.background;
             ClosebtnStyle.onActive.background = ClosebtnStyle.active.background;
-            ClosebtnStyle.padding = Utilities.SetRectOffset(ClosebtnStyle.padding, 3);
+            ClosebtnStyle.padding = RSTUtils.Utilities.SetRectOffset(ClosebtnStyle.padding, 3);
 
             ResizeStyle = new GUIStyle(GUI.skin.button)
             {
@@ -156,7 +156,7 @@ namespace DF
                 fontStyle = FontStyle.Normal
             };
             ResizeStyle.onActive.background = ClosebtnStyle.active.background;
-            ResizeStyle.padding = Utilities.SetRectOffset(ClosebtnStyle.padding, 3);
+            ResizeStyle.padding = RSTUtils.Utilities.SetRectOffset(ClosebtnStyle.padding, 3);
 
             //Init styles
             sectionTitleLeftStyle = new GUIStyle(GUI.skin.label);

@@ -192,13 +192,13 @@ namespace DF
                 {
                     //RTVslConnected = (RemoteTech.API.API.HasLocalControl(id) || RemoteTech.API.API.HasAnyConnection(id));
                     RTVslConnected = RTWrapper.RTactualAPI.HasLocalControl(id) || RTWrapper.RTactualAPI.HasAnyConnection(id);
-                    //Utilities.Log_Debug("vessel " + id + "haslocal " + RemoteTech.API.API.HasLocalControl(id) + " has any " + RemoteTech.API.API.HasAnyConnection(id));
+                    //RSTUtils.Utilities.Log_Debug("vessel " + id + "haslocal " + RemoteTech.API.API.HasLocalControl(id) + " has any " + RemoteTech.API.API.HasAnyConnection(id));
                 }
             }
             catch (Exception ex)
             {
-                Utilities.Log("DeepFreeze Exception attempting to check RemoteTech connections. Report this error on the Forum Thread.");
-                Utilities.Log("DeepFreeze Err: " + ex);
+                RSTUtils.Utilities.Log("DeepFreeze Exception attempting to check RemoteTech connections. Report this error on the Forum Thread.");
+                RSTUtils.Utilities.Log("DeepFreeze Err: " + ex);
             }
             return RTVslConnected;
         }
@@ -215,8 +215,8 @@ namespace DF
                 }
                 catch (Exception ex)
                 {
-                    Utilities.Log("DeepFreeze Exception attempting to check RemoteTech VesselDelay. Report this error on the Forum Thread.");
-                    Utilities.Log("DeepFreeze Err: " + ex);
+                    RSTUtils.Utilities.Log("DeepFreeze Exception attempting to check RemoteTech VesselDelay. Report this error on the Forum Thread.");
+                    RSTUtils.Utilities.Log("DeepFreeze Err: " + ex);
                 }
                 return RTVslDelay;
             }

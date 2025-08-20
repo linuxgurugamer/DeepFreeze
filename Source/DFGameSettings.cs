@@ -67,12 +67,12 @@ namespace DF
                     if (kerbalNode.HasValue("kerbalName"))
                     {
                         string id = kerbalNode.GetValue("kerbalName");
-                        Utilities.Log_Debug("DFGameSettings Loading kerbal = " + id);
+                        RSTUtils.Utilities.Log_Debug("DFGameSettings Loading kerbal = " + id);
                         KerbalInfo kerbalInfo = KerbalInfo.Load(kerbalNode);
                         KnownFrozenKerbals.Add(id, kerbalInfo);
                     }
                 }
-                Utilities.Log_Debug("DFGameSettings finished loading FrozenKerbals");
+                RSTUtils.Utilities.Log_Debug("DFGameSettings finished loading FrozenKerbals");
                 knownVessels.Clear();
                 var vesselNodes = DFsettingsNode.GetNodes(VesselInfo.ConfigNodeName);
                 foreach (ConfigNode vesselNode in vesselNodes)
@@ -80,12 +80,12 @@ namespace DF
                     if (vesselNode.HasValue("Guid"))
                     {
                         Guid id = new Guid(vesselNode.GetValue("Guid"));
-                        Utilities.Log_Debug("DFGameSettings Loading Guid = " + id);
+                        RSTUtils.Utilities.Log_Debug("DFGameSettings Loading Guid = " + id);
                         VesselInfo vesselInfo = VesselInfo.Load(vesselNode);
                         knownVessels[id] = vesselInfo;
                     }
                 }
-                Utilities.Log_Debug("DFGameSettings finished loading KnownVessels");
+                RSTUtils.Utilities.Log_Debug("DFGameSettings finished loading KnownVessels");
                 knownFreezerParts.Clear();
                 var partNodes = DFsettingsNode.GetNodes(PartInfo.ConfigNodeName);
                 foreach (ConfigNode partNode in partNodes)
@@ -93,12 +93,12 @@ namespace DF
                     if (partNode.HasValue("flightID"))
                     {
                         uint id = uint.Parse(partNode.GetValue("flightID"));
-                        Utilities.Log_Debug("DFGameSettings Loading flightID = " + id);
+                        RSTUtils.Utilities.Log_Debug("DFGameSettings Loading flightID = " + id);
                         PartInfo partInfo = PartInfo.Load(partNode);
                         knownFreezerParts[id] = partInfo;
                     }
                 }
-                Utilities.Log_Debug("DFGameSettings finished loading KnownParts");
+                RSTUtils.Utilities.Log_Debug("DFGameSettings finished loading KnownParts");
                 knownKACAlarms.Clear();
                 var KACAlarmNodes = DFsettingsNode.GetNodes(AlarmInfo.ConfigNodeName);
                 foreach (ConfigNode alarmNode in KACAlarmNodes)
@@ -106,14 +106,14 @@ namespace DF
                     if (alarmNode.HasValue("alarmID"))
                     {
                         string alarmID = alarmNode.GetValue("alarmID");
-                        Utilities.Log_Debug("DFGameSettings Loading alarmID = " + alarmID);
+                        RSTUtils.Utilities.Log_Debug("DFGameSettings Loading alarmID = " + alarmID);
                         AlarmInfo alarmInfo = AlarmInfo.Load(alarmNode);
                         knownKACAlarms[alarmID] = alarmInfo;
                     }
                 }
                 SyncDictionaries();
             }
-            Utilities.Log_Debug("DFGameSettings Loading Complete");
+            RSTUtils.Utilities.Log_Debug("DFGameSettings Loading Complete");
         }
 
         internal void Save(ConfigNode node)
@@ -133,46 +133,46 @@ namespace DF
             foreach (var entry in KnownFrozenKerbals)
             {
                 ConfigNode vesselNode = entry.Value.Save(settingsNode);
-                Utilities.Log_Debug("DFGameSettings Saving kerbal = " + entry.Key);
+                RSTUtils.Utilities.Log_Debug("DFGameSettings Saving kerbal = " + entry.Key);
                 vesselNode.AddValue("kerbalName", entry.Key);
             }
 
             foreach (var entry in knownVessels)
             {
                 ConfigNode vesselNode = entry.Value.Save(settingsNode);
-                Utilities.Log_Debug("DFGameSettings Saving Guid = " + entry.Key);
+                RSTUtils.Utilities.Log_Debug("DFGameSettings Saving Guid = " + entry.Key);
                 vesselNode.AddValue("Guid", entry.Key);
             }
 
             foreach (var entry in knownFreezerParts)
             {
                 ConfigNode partNode = entry.Value.Save(settingsNode);
-                Utilities.Log_Debug("DFGameSettings Saving part flightID = " + entry.Key);
+                RSTUtils.Utilities.Log_Debug("DFGameSettings Saving part flightID = " + entry.Key);
                 partNode.AddValue("flightID", entry.Key);
             }
 
             foreach (var entry in knownKACAlarms)
             {
                 ConfigNode alarmNode = entry.Value.Save(settingsNode);
-                Utilities.Log_Debug("DFGameSettings Saving KACAlarm = " + entry.Key);
+                RSTUtils.Utilities.Log_Debug("DFGameSettings Saving KACAlarm = " + entry.Key);
                 alarmNode.AddValue("alarmID", entry.Key);
             }
 
-            Utilities.Log_Debug("DFGameSettings Saving Complete");
+            RSTUtils.Utilities.Log_Debug("DFGameSettings Saving Complete");
         }
 
         internal void DmpKnownFznKerbals()
         {
-            Utilities.Log_Debug("Dump of KnownFrozenKerbals");
+            RSTUtils.Utilities.Log_Debug("Dump of KnownFrozenKerbals");
             if (!KnownFrozenKerbals.Any())
             {
-                Utilities.Log_Debug("KnownFrozenKerbals is EMPTY.");
+                RSTUtils.Utilities.Log_Debug("KnownFrozenKerbals is EMPTY.");
             }
             else
             {
                 foreach (KeyValuePair<string, KerbalInfo> kerbal in KnownFrozenKerbals)
                 {
-                    Utilities.Log_Debug("Kerbal = " + kerbal.Key + " status = " + kerbal.Value.status + " type = " +
+                    RSTUtils.Utilities.Log_Debug("Kerbal = " + kerbal.Key + " status = " + kerbal.Value.status + " type = " +
                                         kerbal.Value.type + " vesselID = " + kerbal.Value.vesselID);
                 }
             }
@@ -180,16 +180,16 @@ namespace DF
 
         internal void DmpKnownVessels()
         {
-            Utilities.Log_Debug("Dump of KnownVessels");
+            RSTUtils.Utilities.Log_Debug("Dump of KnownVessels");
             if (!knownVessels.Any())
             {
-                Utilities.Log_Debug("KnownVessels is EMPTY.");
+                RSTUtils.Utilities.Log_Debug("KnownVessels is EMPTY.");
             }
             else
             {
                 foreach (KeyValuePair<Guid, VesselInfo> vessel in knownVessels)
                 {
-                    Utilities.Log_Debug("Vessel = " + vessel.Key + " Name = " + vessel.Value.vesselName + " ,crew = " +
+                    RSTUtils.Utilities.Log_Debug("Vessel = " + vessel.Key + " Name = " + vessel.Value.vesselName + " ,crew = " +
                                         vessel.Value.numCrew + " ,frozencrew = " + vessel.Value.numFrznCrew);
                 }
             }
@@ -219,7 +219,7 @@ namespace DF
                         }
                     }
                     frznkerbalstoDelete.Add(FrznKerbal.Key);
-                    Utilities.Log("Found orphaned Frozen Kerbal Entry in Database for " + FrznKerbal.Key +" Deleting entry");
+                    RSTUtils.Utilities.Log("Found orphaned Frozen Kerbal Entry in Database for " + FrznKerbal.Key +" Deleting entry");
                 }
             }
             frznkerbalstoDelete.ForEach(id => KnownFrozenKerbals.Remove(id));
@@ -230,7 +230,7 @@ namespace DF
                 {
                     //Couldn't find one. Remove from Dictionary
                     freezerPartstoDelete.Add(FrzrPart.Key);
-                    Utilities.Log("Found orphaned Freezer Part Entry in Database for " + FrzrPart.Key + " Deleting entry");
+                    RSTUtils.Utilities.Log("Found orphaned Freezer Part Entry in Database for " + FrzrPart.Key + " Deleting entry");
                 }
             }
             freezerPartstoDelete.ForEach(id => knownFreezerParts.Remove(id));

@@ -64,8 +64,8 @@ namespace DF
             node.TryGetValue("vesselName", ref vesselName);
             double lastUpdate = 0f;
             node.TryGetValue("lastUpdate", ref lastUpdate);
-            //string vesselName = Utilities.GetNodeValue(node, "vesselName", "Unknown");
-            //double lastUpdate = Utilities.GetNodeValue(node, "lastUpdate", 0.0);
+            //string vesselName = RSTUtils.Utilities.GetNodeValue(node, "vesselName", "Unknown");
+            //double lastUpdate = RSTUtils.Utilities.GetNodeValue(node, "lastUpdate", 0.0);
 
             VesselInfo info = new VesselInfo(vesselName, lastUpdate);
             node.TryGetValue("numSeats", ref info.numSeats);

@@ -137,7 +137,7 @@ namespace DF
             node.TryGetValue("deathCounter", ref info.deathCounter);
             node.TryGetValue("tmpdeathCounter", ref info.tmpdeathCounter);
             node.TryGetValue("outofEC", ref info.outofEC);
-            info.TmpStatus = Utilities.GetNodeValue(node, "TmpStatus", FrzrTmpStatus.OK);
+            info.TmpStatus = RSTUtils.Utilities.GetNodeValue(node, "TmpStatus", FrzrTmpStatus.OK);
             node.TryGetValue("cabinTemp", ref info.cabinTemp);
             node.TryGetValue("ECWarning", ref info.ECWarning);
             node.TryGetValue("TempWarning", ref info.TempWarning);

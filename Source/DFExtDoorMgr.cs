@@ -35,7 +35,7 @@ namespace DF
                 if (Freezer == null)
                 {
                     Freezer = part.FindModuleImplementing<DeepFreezer>();
-                    Utilities.Log_Debug("DFExtDoorMgr OnUpdate Set part " + part.name);
+                    RSTUtils.Utilities.Log_Debug("DFExtDoorMgr OnUpdate Set part " + part.name);
                 }
             }
         }
@@ -45,7 +45,7 @@ namespace DF
             if (Freezer == null)
             {
                 Freezer = part.FindModuleImplementing<DeepFreezer>();
-                Utilities.Log_Debug("DFExtDoorMgr buttonExtDoorState set part " + part.name);
+                RSTUtils.Utilities.Log_Debug("DFExtDoorMgr buttonExtDoorState set part " + part.name);
             }
             if (Freezer == null) return; // If freezer is still null just return
             if (!Freezer.ExternalDoorActive) return;  // if freezer doesn't have an external door just return.
@@ -54,7 +54,7 @@ namespace DF
             {
                 //Door is open so we trigger a closedoor.
                 Freezer.eventCloseDoors();
-                Utilities.Log_Debug("DFExtDoorMgr ButtonExtDoor fired triggered eventCloseDoors");
+                RSTUtils.Utilities.Log_Debug("DFExtDoorMgr ButtonExtDoor fired triggered eventCloseDoors");
             }
             else
             {
@@ -62,32 +62,32 @@ namespace DF
                 {
                     //Door is closed so we trigger a opendoor.
                     Freezer.eventOpenDoors();
-                    Utilities.Log_Debug("DFExtDoorMgr ButtonExtDoor fired triggered eventOpenDoors");
+                    RSTUtils.Utilities.Log_Debug("DFExtDoorMgr ButtonExtDoor fired triggered eventOpenDoors");
                 }
                 else
                 {
                     // door already opening or closing...
-                    Utilities.Log_Debug("DFExtDoorMgr ButtonExtDoor fired but door state is opening, closing or unknown");
+                    RSTUtils.Utilities.Log_Debug("DFExtDoorMgr ButtonExtDoor fired but door state is opening, closing or unknown");
                 }
             }
         }
 
         public bool ButtonExtDoorState()
         {
-            // Utilities.Log_Debug("DFExtDoorMgr ButtonExtDoorState fired");
+            // RSTUtils.Utilities.Log_Debug("DFExtDoorMgr ButtonExtDoorState fired");
             if (Freezer == null)
             {
                 Freezer = part.FindModuleImplementing<DeepFreezer>();
-                Utilities.Log_Debug("DFExtDoorMgr buttonExtDoorState set part " + part.name);
+                RSTUtils.Utilities.Log_Debug("DFExtDoorMgr buttonExtDoorState set part " + part.name);
             }
             if (Freezer == null) return false; // if freezer still null return false
             if (!Freezer.ExternalDoorActive) return false; // if freezer doesn't have an external door just return.
             if (Freezer._externaldoorstate == DoorState.CLOSED || Freezer._externaldoorstate == DoorState.CLOSING || Freezer._externaldoorstate == DoorState.UNKNOWN)
             {
-                Utilities.Log_Debug("DFExtDoorMgr Door is closed or closing or unknown return state false");
+                RSTUtils.Utilities.Log_Debug("DFExtDoorMgr Door is closed or closing or unknown return state false");
                 return false;
             }
-            Utilities.Log_Debug("DFExtDoorMgr Door is open or opening return state true");
+            RSTUtils.Utilities.Log_Debug("DFExtDoorMgr Door is open or opening return state true");
             return true;
         }
     }

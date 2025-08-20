@@ -56,13 +56,13 @@ namespace DF
 
         internal static AlarmInfo Load(ConfigNode node)
         {
-            Guid vesselID = Utilities.GetNodeValue(node, "vesselID");
+            Guid vesselID = RSTUtils.Utilities.GetNodeValue(node, "vesselID");
             string Name = "";
             node.TryGetValue("Name", ref Name);
             
             AlarmInfo info = new AlarmInfo(Name, vesselID);
 
-            info.AlarmType = Utilities.GetNodeValue(node, "AlarmType", KACWrapper.KACAPI.AlarmTypeEnum.Raw);
+            info.AlarmType = RSTUtils.Utilities.GetNodeValue(node, "AlarmType", KACWrapper.KACAPI.AlarmTypeEnum.Raw);
             node.TryGetValue("Notes", ref info.Notes);
             node.TryGetValue("AlarmTime", ref info.AlarmTime);
             node.TryGetValue("AlarmMargin", ref info.AlarmMargin);

@@ -16,14 +16,14 @@ namespace DF
         // Is the Test OK ?
         public override bool TestCondition()
         {
-             Utilities.Log_Debug("DFEngReport Test condition");
+             RSTUtils.Utilities.Log_Debug("DFEngReport Test condition");
             ship = EditorLogic.fetch.ship;
             cryofreezers.Clear();
             cryofreezers = (from p in ship.parts where p.Modules.Contains("DeepFreezer") select p).ToList();
             if (!cryofreezers.Any())
             {
                 //No freezer parts
-                 Utilities.Log_Debug("DFEngReport No Freezer Parts");
+                 RSTUtils.Utilities.Log_Debug("DFEngReport No Freezer Parts");
                 return true;
             }
 
@@ -42,10 +42,10 @@ namespace DF
             //If we found 5 or more units of glykerol all ok.
             if (glykerolOnBoard >= 5)
             {
-                 Utilities.Log_Debug("DFEngReport 5 units found");
+                 RSTUtils.Utilities.Log_Debug("DFEngReport 5 units found");
                 return true;
             }
-             Utilities.Log_Debug("DFEngReport No Glykerol Found");
+             RSTUtils.Utilities.Log_Debug("DFEngReport No Glykerol Found");
             return false;
         }
 

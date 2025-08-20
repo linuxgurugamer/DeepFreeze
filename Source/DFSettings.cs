@@ -165,12 +165,12 @@ namespace DF
             settingsNode.AddValue("internalNxtFrzrCamCode", internalNxtFrzrCamCode);
             settingsNode.AddValue("internalPrvFrzrCamCode", internalPrvFrzrCamCode);
 
-            Utilities.Log_Debug("DFSettings save complete");
+            RSTUtils.Utilities.Log_Debug("DFSettings save complete");
         }
 
         internal void ApplySettings()
         {
-            Utilities.Log_Debug("DFSettings ApplySettings Start");
+            RSTUtils.Utilities.Log_Debug("DFSettings ApplySettings Start");
             if (HighLogic.CurrentGame != null)
             {
                 var DF_SettingsParms = HighLogic.CurrentGame.Parameters.CustomParams<DeepFreeze_SettingsParms>();
@@ -211,7 +211,7 @@ namespace DF
                         }
                     }
                     debugging = DF_SettingsParms_Sec3.DebugLogging;
-                    Utilities.debuggingOn = debugging;
+                    RSTUtils.Utilities.debuggingOn = debugging;
                     ToolTips = DF_SettingsParms_Sec3.ToolTips;
                     AutoRecoverFznKerbals = DF_SettingsParms.AutoRecoverFznKerbals;
                     KSCcostToThawKerbal = DF_SettingsParms.KSCcostToThawKerbal;
@@ -241,11 +241,11 @@ namespace DF
                     }
                 }
                 else
-                    Utilities.Log_Debug("DFSettings ApplySettings Settings Params Not Set!");
+                    RSTUtils.Utilities.Log_Debug("DFSettings ApplySettings Settings Params Not Set!");
             }
             else
-                Utilities.Log_Debug("DFSettings ApplySettings CurrentGame is NULL!");
-            Utilities.Log_Debug("DFSettings ApplySettings End");
+                RSTUtils.Utilities.Log_Debug("DFSettings ApplySettings CurrentGame is NULL!");
+            RSTUtils.Utilities.Log_Debug("DFSettings ApplySettings End");
         }
     }
 }

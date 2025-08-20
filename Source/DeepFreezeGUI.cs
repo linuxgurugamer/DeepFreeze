@@ -256,7 +256,7 @@ namespace DF
 
         internal void Start()
         {
-            Utilities.Log_Debug("DeepFreezeGUI startup");
+            RSTUtils.Utilities.Log_Debug("DeepFreezeGUI startup");
             CacheLocalStrings();
             windowID = Utilities.getnextrandomInt();
             KACwindowID = Utilities.getnextrandomInt();
@@ -308,7 +308,7 @@ namespace DF
 
             DFMenuAppLToolBar.Start(Useapplauncher);
             
-            Utilities.Log_Debug("DeepFreezeGUI END startup");
+            RSTUtils.Utilities.Log_Debug("DeepFreezeGUI END startup");
         }
         
         private void FixedUpdate()
@@ -335,7 +335,7 @@ namespace DF
                 int intVesselidx = Utilities.getVesselIdx(switchVessel);
                 if (intVesselidx < 0)
                 {
-                    Utilities.Log("Couldn't find the index for the vessel " + switchVessel.vesselName + "(" +
+                    RSTUtils.Utilities.Log("Couldn't find the index for the vessel " + switchVessel.vesselName + "(" +
                                   switchVessel.id + ")");
                     showUnabletoSwitchVessel = true;
                 }
@@ -551,7 +551,7 @@ namespace DF
                             {
                                 if (vsl.predictedECOut < DeepFreeze.Instance.DFsettings.ECLowWarningTime)  // ONE HOUR OF EC WARNING
                                 {
-                                    // Utilities.Log_Debug("Remaining EC time " + vsl.predictedECOut);
+                                    // RSTUtils.Utilities.Log_Debug("Remaining EC time " + vsl.predictedECOut);
                                     GUILayout.Label(cacheautoLOC_DF_00032, Textures.StatusWarnStyle, GUILayout.Width(DFvslPrtElec)); //"LOW"
                                 }
                                 else
@@ -734,7 +734,7 @@ namespace DF
                                 Vessel vessel = FlightGlobals.Vessels.Find(v => v.id == kerbal.Value.vesselID);
                                 if (vessel != null)
                                 {
-                                    Utilities.Log_Debug("Cannot thaw, vessel still exists " + vessel.situation + " at " + vessel.mainBody.bodyName);
+                                    RSTUtils.Utilities.Log_Debug("Cannot thaw, vessel still exists " + vessel.situation + " at " + vessel.mainBody.bodyName);
                                     ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00042", kerbal.Key, vessel.situation.displayDescription(), vessel.mainBody.displayName), 5.0f, ScreenMessageStyle.UPPER_CENTER); //Cannot thaw <<1>> from KSC. Vessel still exists <<2>> at <<3>>
                                 }
                                 else
@@ -832,7 +832,7 @@ namespace DF
                 return;
             }
 
-            // Utilities.Log_Debug("start WindowKAC ModKacAlarm active=" + ModKACAlarm);
+            // RSTUtils.Utilities.Log_Debug("start WindowKAC ModKacAlarm active=" + ModKACAlarm);
 
             //Draw the alarms that KAC has that are for the CURRENT Vessel ONLY, so ONLY in FLIGHT mode.
             GUIscrollViewVectorKAC = GUILayout.BeginScrollView(GUIscrollViewVectorKAC, false, false);
@@ -875,7 +875,7 @@ namespace DF
                             GUILayout.Label(alarm.AlarmType.ToString(), Textures.statusStyle, GUILayout.Width(KACtxtWdthAtyp));
                             GUILayout.Label(Utilities.FormatDateString(TmeRemaining), Textures.statusStyle, GUILayout.Width(KACtxtWdthATme));
                         }
-                        // Utilities.Log_Debug("Show alarm  from KAC " + alarm.ID + " " + alarm.Name + " " + alarm.VesselID);
+                        // RSTUtils.Utilities.Log_Debug("Show alarm  from KAC " + alarm.ID + " " + alarm.Name + " " + alarm.VesselID);
 
                         //Option to delete each alarm
                         if (ModKACAlarm || (DFInstalledMods.IsRTInstalled && !DFInstalledMods.RTVesselConnected(tmpid)))
@@ -884,7 +884,7 @@ namespace DF
                             GUI.enabled = false;
                             GUILayout.Button(new GUIContent(cacheautoLOC_DF_00118, cacheautoLOC_DF_00119), GUILayout.Width(80)); //#autoLOC_DF_00118 = Delete #autoLOC_DF_00119 = Delete this KAC alarm completely
                             GUI.enabled = true;
-                            // Utilities.Log_Debug("Delete button disabled");
+                            // RSTUtils.Utilities.Log_Debug("Delete button disabled");
                         }
                         else
                         {
@@ -904,11 +904,11 @@ namespace DF
                                 GUI.enabled = false;
                                 GUILayout.Button(new GUIContent(cacheautoLOC_DF_00120, cacheautoLOC_DF_00121), GUILayout.Width(80)); //#autoLOC_DF_00120 = Modify #autoLOC_DF_00121 = Modify this Alarm
                                 GUI.enabled = true;
-                                // Utilities.Log_Debug("Modify button disabled");
+                                // RSTUtils.Utilities.Log_Debug("Modify button disabled");
                             }
                             else //We are modifying an alarm and it's this one. So we draw a SAVE and Cancel button to save/cancel changes.
                             {
-                                // Utilities.Log_Debug("mod in progress and it's this one, change to Save/Cancel");
+                                // RSTUtils.Utilities.Log_Debug("mod in progress and it's this one, change to Save/Cancel");
                                 if (GUILayout.Button(new GUIContent(cacheautoLOC_DF_00122, cacheautoLOC_DF_00123), GUILayout.Width(80))) //#autoLOC_DF_00122 = Save #autoLOC_DF_00123 = Save Alarm Changes
                                 {
                                     if (DFInstalledMods.IsRTInstalled && !DFInstalledMods.RTVesselConnected(tmpid))
@@ -921,19 +921,19 @@ namespace DF
                                         {
                                             DFIntMemory.Instance.ModifyKACAlarm(KACalarmMod, KACAlarm_FrzKbls, KACAlarm_ThwKbls);
                                             ScreenMessages.PostScreenMessage(cacheautoLOC_DF_00125, 5.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00125 = DeepFreeze Alarm changes Saved.
-                                            // Utilities.Log_Debug("DF KAC Modified alarm " + KACalarmMod.ID + " " + KACalarmMod.Name);
+                                            // RSTUtils.Utilities.Log_Debug("DF KAC Modified alarm " + KACalarmMod.ID + " " + KACalarmMod.Name);
                                         }
                                         else
                                         {
                                             ScreenMessages.PostScreenMessage(cacheautoLOC_DF_00126, 5.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00126 = DeepFreeze Cannot Save alarm changes, Time is up.
-                                            Utilities.Log_Debug("DF KAC Couldn't save Modified alarm time is up");
+                                            RSTUtils.Utilities.Log_Debug("DF KAC Couldn't save Modified alarm time is up");
                                         }
                                     }
                                     ModKACAlarm = false;
                                 }
                                 if (GUILayout.Button(new GUIContent(cacheautoLOC_DF_00127, cacheautoLOC_DF_00128), GUILayout.Width(80))) //#autoLOC_DF_00127 = Cancel #autoLOC_DF_00128 = Cancel any changes
                                 {
-                                    // Utilities.Log_Debug("User cancelled mod");
+                                    // RSTUtils.Utilities.Log_Debug("User cancelled mod");
                                     ModKACAlarm = false;
                                 }
                                 GUILayout.EndHorizontal();
@@ -1049,7 +1049,7 @@ namespace DF
                         }
                         else  // no modify is in progress so we draw modify buttons on all alarms
                         {
-                            // Utilities.Log_Debug("no modify in progress so just show modify buttons on KAC alarm");
+                            // RSTUtils.Utilities.Log_Debug("no modify in progress so just show modify buttons on KAC alarm");
                             if (TmeRemaining <= 0) GUI.enabled = false;
                             if (GUILayout.Button(new GUIContent(cacheautoLOC_DF_00137, cacheautoLOC_DF_00138), GUILayout.Width(80))) //#autoLOC_DF_00137 = Modify #autoLOC_DF_00138 = Modify this Alarms settings
                             {
@@ -1058,7 +1058,7 @@ namespace DF
                                 KACAlarm_ThwKbls.Clear();
                                 string tmpnotes = DFIntMemory.Instance.ParseKACNotes(alarm.Notes, out KACAlarm_FrzKbls, out KACAlarm_ThwKbls);
                                 ModKACAlarm = true;
-                                // Utilities.Log_Debug("Modify in progress " + alarm.ID);
+                                // RSTUtils.Utilities.Log_Debug("Modify in progress " + alarm.ID);
                             }
                             GUI.enabled = true;
                         }
@@ -1230,7 +1230,7 @@ namespace DF
         //Class Load and Save of global settings
         public void Load(ConfigNode globalNode)
         {
-            Utilities.Log_Debug("DeepFreezeGUI Load");
+            RSTUtils.Utilities.Log_Debug("DeepFreezeGUI Load");
             DFwindowPos.x = DeepFreeze.Instance.DFsettings.DFwindowPosX;
             DFwindowPos.y = DeepFreeze.Instance.DFsettings.DFwindowPosY;
             DFKACwindowPos.x = DeepFreeze.Instance.DFsettings.DFKACwindowPosX;
@@ -1238,17 +1238,17 @@ namespace DF
             DFWINDOW_WIDTH = DeepFreeze.Instance.DFsettings.DFWindowWidth;
             KACWINDOW_WIDTH = DeepFreeze.Instance.DFsettings.KACWindowWidth;
             WINDOW_BASE_HEIGHT = DeepFreeze.Instance.DFsettings.WindowbaseHeight;
-            Utilities.Log_Debug("DeepFreezeGUI Load end");
+            RSTUtils.Utilities.Log_Debug("DeepFreezeGUI Load end");
         }
 
         public void Save(ConfigNode globalNode)
         {
-            Utilities.Log_Debug("DeepFreezeGUI Save");
+            RSTUtils.Utilities.Log_Debug("DeepFreezeGUI Save");
             DeepFreeze.Instance.DFsettings.DFwindowPosX = DFwindowPos.x;
             DeepFreeze.Instance.DFsettings.DFwindowPosY = DFwindowPos.y;
             DeepFreeze.Instance.DFsettings.DFKACwindowPosX = DFKACwindowPos.x;
             DeepFreeze.Instance.DFsettings.DFKACwindowPosY = DFKACwindowPos.y;
-            Utilities.Log_Debug("DeepFreezeGUI Save end");
+            RSTUtils.Utilities.Log_Debug("DeepFreezeGUI Save end");
         }
 
         #endregion Savable
