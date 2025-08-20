@@ -15,6 +15,7 @@
  */
 
 using RSTUtils;
+using static RSTUtils.Utilities;
 
 namespace DF
 {

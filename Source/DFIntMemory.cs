@@ -21,6 +21,7 @@ using BackgroundResources;
 using KSP.UI.Screens;
 using PreFlightTests;
 using RSTUtils;
+using static RSTUtils.Utilities;
 using UnityEngine;
 using KSP.Localization;
 

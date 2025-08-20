@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using BackgroundResources;
 using DeepFreeze;
 using RSTUtils;
+using static RSTUtils.Utilities;
 
 namespace DF
 {
