@@ -45,7 +45,7 @@ namespace RSTUtils
 	}
 #endif
 	
-	internal static class Utilities
+	public static class Utilities
 	{
 		public static int randomSeed = new Random().Next();
 		private static int _nextrandomInt = randomSeed;        
@@ -262,7 +262,7 @@ namespace RSTUtils
 		}
 
         // Use Reflection to get a field from an object
-        internal static FieldInfo GetFieldObject(object o, string fieldName)
+        public static FieldInfo GetFieldObject(object o, string fieldName)
         {
             foreach (FieldInfo field in o.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public))
             {
@@ -278,7 +278,7 @@ namespace RSTUtils
         }
 
         // Use Reflection to get a field from an object
-        internal static object GetObjectMethod(object o, string methodName)
+        public static object GetObjectMethod(object o, string methodName)
         {
             object outputObj = new object();
             bool foundObj = false;
@@ -312,7 +312,7 @@ namespace RSTUtils
 		  * @return Desired transform or null if it could not be found
 		  */
 
-        internal static Transform FindInChildren(Transform transform, string name)
+        public static Transform FindInChildren(Transform transform, string name)
 		{
 			// Is this null?
 			if (transform == null)
@@ -342,7 +342,7 @@ namespace RSTUtils
 			return parent.gameObject.GetComponentsInChildren<Animation>().FirstOrDefault(t => t.name == name);
 		}
 
-		internal static void dmpKerbalRefs(Kerbal kerbal, Kerbal seatkerbalref, Kerbal protocrewkerbalref)
+        public static void dmpKerbalRefs(Kerbal kerbal, Kerbal seatkerbalref, Kerbal protocrewkerbalref)
 		{
 			if (kerbal != null)
 			{
@@ -368,7 +368,7 @@ namespace RSTUtils
 			}
 		}
 
-		internal static void dmpAllKerbals()
+        public static void dmpAllKerbals()
 		{
 			foreach (Kerbal kerbal in Resources.FindObjectsOfTypeAll<Kerbal>())
 			{
@@ -377,7 +377,7 @@ namespace RSTUtils
 			}
 		}
 
-		internal static void dmpAnimationNames(Animation anim)
+        public static void dmpAnimationNames(Animation anim)
 		{
 			List<AnimationState> states = new List<AnimationState>(anim.Cast<AnimationState>());
 			Log_Debug("Animation " + anim.name);
@@ -387,8 +387,8 @@ namespace RSTUtils
 			}
 		}
 
-		// The following method is modified from RasterPropMonitor as-is. Which is covered by GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
-		internal static void setTransparentTransforms(this Part thisPart, string transparentTransforms)
+        // The following method is modified from RasterPropMonitor as-is. Which is covered by GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+        public static void setTransparentTransforms(this Part thisPart, string transparentTransforms)
 		{
 			string transparentShaderName = "Transparent/Specular";
 			Shader transparentShader = Shader.Find(transparentShaderName);
@@ -453,15 +453,15 @@ namespace RSTUtils
 
 		private static Shader DepthMaskShader;
 		private static string DepthMaskShaderName = "DepthMask";
-		/// <summary>
-		/// Will search for and change the Mesh (and all it's children) supplied in MeshName Field on the part supplied to Enabled or NotEnabled based on the SetVisible parm.
-		/// </summary>
-		/// <param name="part">The part to look for the mesh on</param>
-		/// <param name="SetVisible">True will Enable the mesh, False will disable the mesh</param>
-		/// <param name="MeshName">String containing the Mesh name to look for on the part</param>
-		/// <param name="cachedTransform">Can pass in a cached transform; which will be used instead of searching for it.</param>
-		/// <returns>The parent/cached transform that was changed... Or Null if not found.</returns>
-		internal static Transform SetInternalDepthMask(Part part, bool SetVisible, string MeshName = "", Transform cachedTransform = null)
+        /// <summary>
+        /// Will search for and change the Mesh (and all it's children) supplied in MeshName Field on the part supplied to Enabled or NotEnabled based on the SetVisible parm.
+        /// </summary>
+        /// <param name="part">The part to look for the mesh on</param>
+        /// <param name="SetVisible">True will Enable the mesh, False will disable the mesh</param>
+        /// <param name="MeshName">String containing the Mesh name to look for on the part</param>
+        /// <param name="cachedTransform">Can pass in a cached transform; which will be used instead of searching for it.</param>
+        /// <returns>The parent/cached transform that was changed... Or Null if not found.</returns>
+        public static Transform SetInternalDepthMask(Part part, bool SetVisible, string MeshName = "", Transform cachedTransform = null)
 		{
 		    Transform parentTransform = null;
             if (DepthMaskShader == null) DepthMaskShader = Shader.Find(DepthMaskShaderName);
@@ -520,8 +520,8 @@ namespace RSTUtils
 			Log_Debug("isATMBreathable Inflight? " + value + " InFlight " + HighLogic.LoadedSceneIsFlight + " StaticPressure " + FlightGlobals.getStaticPressure());
 			return value;
 		}
-        
-		internal static void setHelmetshaders(Kerbal thatKerbal, bool helmetOn)
+
+        public static void setHelmetshaders(Kerbal thatKerbal, bool helmetOn)
 		{
 			//This will check if Atmospher is breathable then we always remove our hetmets regardless.
 			if (helmetOn && isAtmBreathable())
@@ -541,7 +541,7 @@ namespace RSTUtils
 			}
 		}
 
-		internal static void setHelmets(this Part thisPart, bool helmetOn)
+        public static void setHelmets(this Part thisPart, bool helmetOn)
 		{
 			if (thisPart.internalModel == null)
 			{
@@ -583,8 +583,8 @@ namespace RSTUtils
 			}
 		}
 
-		// Sets the kerbal layers to make them visible (Thawed) or not (Frozen), setVisible = true sets layers to visible, false turns them off.
-		internal static void setFrznKerbalLayer(Part part, ProtoCrewMember kerbal, bool setVisible)
+        // Sets the kerbal layers to make them visible (Thawed) or not (Frozen), setVisible = true sets layers to visible, false turns them off.
+        public static void setFrznKerbalLayer(Part part, ProtoCrewMember kerbal, bool setVisible)
 		{
 			if (!setVisible)
 			{
@@ -604,7 +604,7 @@ namespace RSTUtils
 		private static RuntimeAnimatorController kerbalIVAController, myController;
 		private static AnimatorOverrideController myOverrideController;
 
-		internal static void subdueIVAKerbalAnimations(Kerbal kerbal)
+        public static void subdueIVAKerbalAnimations(Kerbal kerbal)
 		{
 			try
 			{
@@ -719,29 +719,29 @@ namespace RSTUtils
             return null;
         }
 
-		#endregion Kerbals
+        #endregion Kerbals
 
-		#region Vessels
-		// The following method is taken from RasterPropMonitor as-is. Which is covered by GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
-		/// <summary>
-		/// Returns True if thatVessel is the activevessel and the camera is in IVA mode, otherwise returns false.
-		/// </summary>
-		/// <param name="thatVessel"></param>
-		/// <returns></returns>
-		internal static bool VesselIsInIVA(Vessel thatVessel)
+        #region Vessels
+        // The following method is taken from RasterPropMonitor as-is. Which is covered by GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+        /// <summary>
+        /// Returns True if thatVessel is the activevessel and the camera is in IVA mode, otherwise returns false.
+        /// </summary>
+        /// <param name="thatVessel"></param>
+        /// <returns></returns>
+        public static bool VesselIsInIVA(Vessel thatVessel)
 		{
 			// Inactive IVAs are renderer.enabled = false, this can and should be used...
 			// ... but now it can't because we're doing transparent pods, so we need a more complicated way to find which pod the player is in.
 			return HighLogic.LoadedSceneIsFlight && IsActiveVessel(thatVessel) && IsInIVA;
 		}
 
-		// The following method is taken from RasterPropMonitor as-is. Which is covered by GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
-		/// <summary>
-		/// Returns True if thatVessel is the ActiveVessel, otherwise returns false.
-		/// </summary>
-		/// <param name="thatVessel"></param>
-		/// <returns></returns>
-		internal static bool IsActiveVessel(Vessel thatVessel)
+        // The following method is taken from RasterPropMonitor as-is. Which is covered by GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+        /// <summary>
+        /// Returns True if thatVessel is the ActiveVessel, otherwise returns false.
+        /// </summary>
+        /// <param name="thatVessel"></param>
+        /// <returns></returns>
+        public static bool IsActiveVessel(Vessel thatVessel)
 		{
 			return HighLogic.LoadedSceneIsFlight && thatVessel != null && thatVessel.isActiveVessel;
 		}
@@ -798,23 +798,23 @@ namespace RSTUtils
 					select thatSeat.kerbalRef).FirstOrDefault();
 		}
 
-		// The following method is taken from RasterPropMonitor as-is. Which is covered by GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
-		/// <summary>
-		/// True if Camera is in IVA mode, otherwise false.
-		/// </summary>
-		internal static bool IsInIVA
+        // The following method is taken from RasterPropMonitor as-is. Which is covered by GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+        /// <summary>
+        /// True if Camera is in IVA mode, otherwise false.
+        /// </summary>
+        public static bool IsInIVA
 		{
 			get { return CameraManager.Instance.currentCameraMode == CameraManager.CameraMode.IVA; }
 		}
-		/// <summary>
-		/// True if Camera is in Internal mode, otherwise false.
-		/// </summary>
-		internal static bool IsInInternal
+        /// <summary>
+        /// True if Camera is in Internal mode, otherwise false.
+        /// </summary>
+        public static bool IsInInternal
 		{
 			get { return CameraManager.Instance.currentCameraMode == CameraManager.CameraMode.Internal; }
 		}
 
-		internal static bool ValidVslType(Vessel v)
+        public static bool ValidVslType(Vessel v)
 		{
 			switch (v.vesselType)
 			{
@@ -832,9 +832,9 @@ namespace RSTUtils
 					return false;
 			}
 		}
-	   
-		// The following method is taken from Kerbal Alarm Clock as-is. Which is covered by MIT license.
-		internal static int getVesselIdx(Vessel vtarget)
+
+        // The following method is taken from Kerbal Alarm Clock as-is. Which is covered by MIT license.
+        public static int getVesselIdx(Vessel vtarget)
 		{
 			for (int i = 0; i < FlightGlobals.Vessels.Count; i++)
 			{
@@ -847,13 +847,13 @@ namespace RSTUtils
 			return -1;
 		}
 
-		/// <summary>
-		/// Will Spawn the Internal Model for a part, we do this for DeepFreeze Mod because it doesn't work if the crew capacity is zero, which may be
-		/// the case sometimes for DeepFreeze parts.
-		/// </summary>
-		/// <param name="part">The Part to spawn the internal model for</param>
-		/// <returns>True if successful or False if not</returns>
-		internal static bool spawnInternal(Part part)
+        /// <summary>
+        /// Will Spawn the Internal Model for a part, we do this for DeepFreeze Mod because it doesn't work if the crew capacity is zero, which may be
+        /// the case sometimes for DeepFreeze parts.
+        /// </summary>
+        /// <param name="part">The Part to spawn the internal model for</param>
+        /// <returns>True if successful or False if not</returns>
+        public static bool spawnInternal(Part part)
 		{
 			try
 			{
@@ -913,55 +913,55 @@ namespace RSTUtils
             return bodynames;
         }
 
-		#endregion
+        #endregion
 
-		#region Temperature
+        #region Temperature
         //Temperature
-        internal static float KelvintoCelsius(float kelvin)
+        public static float KelvintoCelsius(float kelvin)
 		{
 			return kelvin - 273.15f;
 		}
 
-		internal static float CelsiustoKelvin(float celsius)
+        public static float CelsiustoKelvin(float celsius)
 		{
 			return celsius + 273.15f;
 		}
 
-		#endregion Temperature
+        #endregion Temperature
 
-		#region Resources
+        #region Resources
 
-		/// <summary>
-		/// Can be used to get amount of a resource there is, amount of space for a resource there is, or push/pull resource.
-		/// </summary>
-		/// <param name="craft">this is the vessel</param>
-		/// <param name="res">this is the string resource name</param>
-		/// <param name="resAmount">amount of the resource</param>
-		/// <param name="ConsumeResource">true to push/pull</param>
-		/// <param name="pulling">true if pulling false if pushing</param>
-		/// <param name="usePri">true if use flow priority false if not</param>
-		/// <param name="resavail">amount of the resource available or push/pulled</param>
-		/// <param name="maxavail">max amount of resource vessel can store</param>
-		/// <returns>bool if successful or not</returns>
-		internal static bool requireResource(Vessel craft, string res, double resAmount, bool ConsumeResource, bool pulling, bool usePri, out double resavail, out double maxavail)
+        /// <summary>
+        /// Can be used to get amount of a resource there is, amount of space for a resource there is, or push/pull resource.
+        /// </summary>
+        /// <param name="craft">this is the vessel</param>
+        /// <param name="res">this is the string resource name</param>
+        /// <param name="resAmount">amount of the resource</param>
+        /// <param name="ConsumeResource">true to push/pull</param>
+        /// <param name="pulling">true if pulling false if pushing</param>
+        /// <param name="usePri">true if use flow priority false if not</param>
+        /// <param name="resavail">amount of the resource available or push/pulled</param>
+        /// <param name="maxavail">max amount of resource vessel can store</param>
+        /// <returns>bool if successful or not</returns>
+        public static bool requireResource(Vessel craft, string res, double resAmount, bool ConsumeResource, bool pulling, bool usePri, out double resavail, out double maxavail)
 		{
 			int resID = PartResourceLibrary.Instance.GetDefinition(res).id;
 			bool result = requireResourceID(craft, resID, resAmount, ConsumeResource, pulling, usePri, out resavail, out maxavail);
 			return result;
 		}
 
-		/// <summary>
-		/// Can be used to get amount of a resource there is, amount of space for a resource there is, or push/pull resource.
-		/// </summary>
-		/// <param name="craft">this is the vessel</param>
-		/// <param name="res">this is the hash of the resource name</param>
-		/// <param name="resAmount">amount of the resource</param>
-		/// <param name="ConsumeResource">true to push/pull</param>
-		/// <param name="pulling">true if pulling false if pushing</param>
-		/// <param name="resavail">amount of the resource available or push/pulled</param>
-		/// <param name="maxavail">max amount of resource vessel can store</param>
-		/// <returns>bool if successful or not</returns>
-		internal static bool requireResourceID(Vessel craft, int res, double resAmount, bool ConsumeResource, bool pulling, bool usePri, out double resavail, out double maxavail)
+        /// <summary>
+        /// Can be used to get amount of a resource there is, amount of space for a resource there is, or push/pull resource.
+        /// </summary>
+        /// <param name="craft">this is the vessel</param>
+        /// <param name="res">this is the hash of the resource name</param>
+        /// <param name="resAmount">amount of the resource</param>
+        /// <param name="ConsumeResource">true to push/pull</param>
+        /// <param name="pulling">true if pulling false if pushing</param>
+        /// <param name="resavail">amount of the resource available or push/pulled</param>
+        /// <param name="maxavail">max amount of resource vessel can store</param>
+        /// <returns>bool if successful or not</returns>
+        public static bool requireResourceID(Vessel craft, int res, double resAmount, bool ConsumeResource, bool pulling, bool usePri, out double resavail, out double maxavail)
 		{
 			if (!craft.loaded)
 			{
@@ -1031,14 +1031,14 @@ namespace RSTUtils
 		public static int scaledScreenWidth = 1;
 		private static bool scaledScreenset;
 
-		internal static void setScaledScreen()
+        public static void setScaledScreen()
 		{
 			scaledScreenHeight = Mathf.RoundToInt(Screen.height / 1);
 			scaledScreenWidth = Mathf.RoundToInt(Screen.width / 1);
 			scaledScreenset = true;
 		}
-		
-		internal static RectOffset SetRectOffset(RectOffset tmpRectOffset, int intValue)
+
+        public static RectOffset SetRectOffset(RectOffset tmpRectOffset, int intValue)
 		{
 			return SetRectOffset(tmpRectOffset, intValue, intValue, intValue, intValue);
 		}
@@ -1064,19 +1064,19 @@ namespace RSTUtils
 		//timer so it only displays for a period of time
 		internal static float fltTooltipTime;
 		internal static float fltMaxToolTipTime = 15f;
-		internal static GUIStyle _TooltipStyle;
-		
-		// The following two methods are derived from Kerbal Alarm Clock mod. Which is licensed under:
-		//The MIT License(MIT) Copyright(c) 2014, David Tregoning
-		// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files(the "Software"), to deal
-		// in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-		// copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-		// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-		// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-		// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-		// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-		// THE SOFTWARE.
-		internal static void DrawToolTip()
+        public static GUIStyle _TooltipStyle;
+
+        // The following two methods are derived from Kerbal Alarm Clock mod. Which is licensed under:
+        //The MIT License(MIT) Copyright(c) 2014, David Tregoning
+        // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files(the "Software"), to deal
+        // in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        // copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+        // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+        // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+        // THE SOFTWARE.
+        public static void DrawToolTip()
 		{
 			if (strToolTipText != "" && (fltTooltipTime < fltMaxToolTipTime))
 			{
@@ -1117,7 +1117,7 @@ namespace RSTUtils
 			strLastTooltipText = strToolTipText;
 		}
 
-		internal static void SetTooltipText()
+        public static void SetTooltipText()
 		{
 			if (Event.current != null && Event.current.type == EventType.Repaint)
 			{
@@ -1239,12 +1239,12 @@ namespace RSTUtils
 			}
 		}
 
-		#endregion GUI&Window
+        #endregion GUI&Window
 
-		#region ConfigNodes
-		// Get Config Node Values out of a config node Methods
+        #region ConfigNodes
+        // Get Config Node Values out of a config node Methods
 
-		internal static Guid GetNodeValue(ConfigNode confignode, string fieldname)
+        public static Guid GetNodeValue(ConfigNode confignode, string fieldname)
 		{
 			if (confignode.HasValue(fieldname))
 			{
@@ -1263,7 +1263,7 @@ namespace RSTUtils
 			return Guid.Empty;
 		}
 
-		internal static T GetNodeValue<T>(ConfigNode confignode, string fieldname, T defaultValue) where T : IComparable, IFormattable, IConvertible
+        public static T GetNodeValue<T>(ConfigNode confignode, string fieldname, T defaultValue) where T : IComparable, IFormattable, IConvertible
 		{
 			if (confignode.HasValue(fieldname))
 			{
@@ -1332,9 +1332,9 @@ namespace RSTUtils
 
 		private static string outputstring;
 		private static int[] datestructure = new int[5];
-		//Format a Time double variable into format "YxxxxDxxxhh:mm:ss"
-		//Future expansion required to format to different formats.
-		internal static string FormatDateString(double time)
+        //Format a Time double variable into format "YxxxxDxxxhh:mm:ss"
+        //Future expansion required to format to different formats.
+        public static string FormatDateString(double time)
 		{
 			outputstring = String.Empty;
 			//int[] datestructure = new int[5];
@@ -1364,13 +1364,13 @@ namespace RSTUtils
 			return outputstring;
 		}
 
-		// Electricity and temperature functions are only valid if timewarp factor is < 5.
-		internal static bool timewarpIsValid(int max)
+        // Electricity and temperature functions are only valid if timewarp factor is < 5.
+        public static bool timewarpIsValid(int max)
 		{
 			return TimeWarp.CurrentRateIndex < max;
 		}
 
-		internal static void stopWarp()
+        public static void stopWarp()
 		{
 			TimeWarp.SetRate(0, false);
 		}
@@ -1528,15 +1528,15 @@ namespace RSTUtils
 		internal static String _AssemblyName
 		{ get { return Assembly.GetExecutingAssembly().GetName().Name; } }
 		
-		internal static bool debuggingOn = false;
-		
-		/// <summary>
-		/// Logging to the debug file
-		/// </summary>
-		/// <param name="Message">Text to be printed - can be formatted as per String.format</param>
-		/// <param name="strParams">Objects to feed into a String.format</param>			
-				
-		internal static void Log_Debug(String Message, params object[] strParams)
+		public static bool debuggingOn = false;
+
+        /// <summary>
+        /// Logging to the debug file
+        /// </summary>
+        /// <param name="Message">Text to be printed - can be formatted as per String.format</param>
+        /// <param name="strParams">Objects to feed into a String.format</param>			
+
+        public static void Log_Debug(String Message, params object[] strParams)
 		{
 			if (debuggingOn)
 			{
@@ -1550,7 +1550,7 @@ namespace RSTUtils
 		/// <param name="Message">Text to be printed - can be formatted as per String.format</param>
 		/// <param name="strParams">Objects to feed into a String.format</param>
 							
-		internal static void Log(String Message, params object[] strParams)
+		public static void Log(String Message, params object[] strParams)
 		{
             Message = Message.Replace("{", "{{").Replace("}", "}}");
             Message = String.Format(Message, strParams);                  // This fills the params into the message

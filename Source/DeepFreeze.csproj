@@ -50,18 +50,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\REPOSoftTechKSPUtils\AppLauncherToolBarExtension.cs">
-      <Link>AppLauncherToolBarExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\REPOSoftTechKSPUtils\RectExtentions.cs">
-      <Link>RectExtentions.cs</Link>
-    </Compile>
-    <Compile Include="..\REPOSoftTechKSPUtils\RSTutilities.cs">
-      <Link>RSTutilities.cs</Link>
-    </Compile>
-    <Compile Include="..\REPOSoftTechKSPUtils\ToolBarManager.cs">
-      <Link>ToolBarManager.cs</Link>
-    </Compile>
     <Compile Include="APIs\DFGameEvents.cs" />
     <Compile Include="APIs\KBWrapper.cs" />
     <Compile Include="AssemblyVersion.cs">
@@ -114,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\REPOSoftTechKSPUtils\REPOSoftTechKSPUtils.csproj">
+      <Project>{c433ffde-6c16-4c18-86d6-94ff8f749bb1}</Project>
+      <Name>REPOSoftTechKSPUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="PostBuildMacros">

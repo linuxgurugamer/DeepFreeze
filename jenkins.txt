@@ -31,6 +31,7 @@
 1:REPOSoftTech/DeepFreeze, DeepFreezeContinued.version
 
 # 2:PROJNAME, PROJFILE, VERSIONFILE, PLUGINSFOLDER
+2:REPOSoftTechKSPUtils,REPOSoftTechKSPUtils/REPOSoftTechKSPUtils.csproj,DeepFreezeContinued.version,GameData/REPOSoftTech/DeepFreeze/Plugins
 2:DeepFreeze,Source/DeepFreeze.csproj,DeepFreezeContinued.version,GameData/REPOSoftTech/DeepFreeze/Plugins
 
 # 3:SOURCEFILE, DESTDIR
