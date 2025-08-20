@@ -112,7 +112,7 @@ namespace DF
             APIReady = false;
             DFsettings = new DFSettings();
             DFgameSettings = new DFGameSettings();
-            globalConfigFilename = Path.Combine(_AssemblyFolder, "PluginData/Config.cfg").Replace("\\", "/");
+            globalConfigFilename = Path.Combine(_AssemblyFolder, "../PluginData/Config.cfg").Replace("\\", "/");
             //Utilities.Log("globalConfigFilename = " + globalConfigFilename);
             DeepFreezeEventAdd();
         }

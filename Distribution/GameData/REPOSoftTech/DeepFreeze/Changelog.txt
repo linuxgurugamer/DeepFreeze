@@ -164,7 +164,7 @@ complications of DeepFreeze parts transparency can either be ON or OFF (RPM AUTO
 Fixed bug where the External Door Open/Close sound effect was not working for the CRY-0300.
 Rationalis(z)ed all the part models and textures into one folder, as a lot of them are shared. This will save some memory. Thanks goes to khr15714n for kicking me into doing this as I have been meaning to for a while.
 Due to this however, if you are upgrading from a previous version of DeepFreeze you MUST delete the /GameData/REPOSoftTech/DeepFreeze entirely BEFORE installing this version. If you want to save your DeepFreeze
-settings make a backup/copy of /GameData/REPOSoftTech/DeepFreeze/Plugins/Config.cfg file BEFORE deleting your DeepFreeze folder then copy you backup/copy of this file
+settings make a backup/copy of /GameData/REPOSoftTech/DeepFreeze/PluginData/Config.cfg file BEFORE deleting your DeepFreeze folder then copy you backup/copy of this file
 back into the /GameData/REPOSoftTech/DeepFreeze/Plugins folder once you have upgraded.
 [B]V0.19.3.0 "KSP 1.0.5"[/B]   
 re-compile for KSP 1.0.5.   
@@ -209,7 +209,7 @@ appear frozen when a frozen kerbal is within.
 You can now switch to Internal Cameras (same cameras used when in IVA and you freeze/thaw a Kerbal) using Modifier key (Windows this is ALT) and d key.
 Switch to the next Cryopod Internal Camera using the 'n' key. Switch to the previous Cryopod Internal Camera using the 'b' key. 
 Press the 'c' or whatever key you have mapped to camera to switch back to IVA/Flight Camera mode.
-You can change the key settings in the \GameData\REPOSoftTech\DeepFreeze\Pluginf\Config.cfg file using a text editor (not available via the in-game settings menu).
+You can change the key settings in the \GameData\REPOSoftTech\DeepFreeze\PluginData\Config.cfg file using a text editor (not available via the in-game settings menu).
 internalFrzrCamCode = 100 - this is the decimal ASCII code for the CameraMode Key, the default is 100 which is the 'd' key.
 internalNxtFrzrCamCode = 110 - this is decimal ASCII code for the Next Freezer Camera Key, the default is 110 which is the 'n' key.
 internalPrvFrzrCamCode = 98 - this is decimal ASCII code for the Previous Freezer Camera Key, the default is 98 which is the 'b' key.

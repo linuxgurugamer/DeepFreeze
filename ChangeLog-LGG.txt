@@ -1,0 +1,13 @@
+Changelog
+
+1.31.0.0
+	Updated notification link for missing module manager
+	Added build files
+		deploy.bat
+		jenkins.txt
+		buildRelease.bat
+	Added code to Utilities.Log to replace braces in strings with double braces, so that the formatting doesn't error.  Needed for people who decide to use braces in their directory names
+	Added RPM patch
+	Moved Plugins/PluginData to root of mod dir 
+	Adjusted path of the Config.cfg file to use new location of PluginData
+	Created new GameData for test & release builds

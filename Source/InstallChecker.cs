@@ -42,6 +42,7 @@ namespace DF
                 if (loadedAssemblies.Any())
                 {
                     var badPaths = loadedAssemblies.Select(a => a.path).Select(p => Uri.UnescapeDataString(new Uri(Path.GetFullPath(KSPUtil.ApplicationRootPath)).MakeRelativeUri(new Uri(p)).ToString().Replace('/', Path.DirectorySeparatorChar)));
+
                     string badPathsString = String.Join("\n", badPaths.ToArray());
                     Utilities.Log(modName + " - Incorrectly installed, bad paths:\n" + badPathsString);
                     PopupDialog.SpawnPopupDialog(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), "IncorrectInstallation", "Incorrect " + modName + " Installation",
@@ -58,7 +59,7 @@ namespace DF
                     {
                         Utilities.Log(modName + " - Missing or incorrectly installed RPM & ModuleManager.");
                         PopupDialog.SpawnPopupDialog(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), "IncorrectInstallation", "Missing Module Manager",
-                            modName + " requires the Module Manager mod in order to function properly with Raster Prop Monitor mod Installed.\n\nPlease download from http://forum.kerbalspaceprogram.com/threads/55219 and copy to the KSP/GameData/ directory.",
+                            modName + " requires the Module Manager mod in order to function properly with Raster Prop Monitor mod Installed.\n\nPlease download from https://forum.kerbalspaceprogram.com/index.php?/topic/50533-* and copy to the KSP/GameData/ directory.",
                             "OK", false, HighLogic.UISkin);
                     }
                 }
