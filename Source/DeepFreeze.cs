@@ -22,6 +22,7 @@ using System.Linq;
 using System.Reflection;
 using BackgroundResources;
 using RSTUtils;
+using static RSTUtils.Utilities;
 using UnityEngine;
 using KSP.Localization;
 
