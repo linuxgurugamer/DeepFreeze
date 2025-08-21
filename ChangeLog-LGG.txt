@@ -12,3 +12,6 @@ Changelog
 	Adjusted path of the Config.cfg file to use new location of PluginData
 	Created new GameData for test & release builds
 	Fixed wrong cache var names in DeepFreeze.GUI.cs
+
+1.31.0.1
+	Added code to avoid NullRefs during KSP bootup

@@ -1816,17 +1816,29 @@ namespace DF
             //Remove GameEvent callbacks.
             Debug.Log("DeepFreezerPart OnDestroy");
             
+            if (GameEvents.onCrewTransferPartListCreated != null)
                 GameEvents.onCrewTransferPartListCreated.Remove(onCrewTransferPartListCreated);
+            if (GameEvents.onCrewTransferred != null)
                 GameEvents.onCrewTransferred.Remove(onCrewTransferred);
+            if (GameEvents.onVesselChange != null)
                 GameEvents.onVesselChange.Remove(OnVesselChange);
-                GameEvents.onCrewBoardVessel.Remove(OnCrewBoardVessel);
+            if (GameEvents.onCrewBoardVessel != null)
+                    GameEvents.onCrewBoardVessel.Remove(OnCrewBoardVessel);
+            if (GameEvents.onCrewOnEva != null)
                 GameEvents.onCrewOnEva.Remove(onCrewOnEva);
+            if (GameEvents.onVesselDestroy!=null)
                 GameEvents.onVesselDestroy.Remove(onVesselDestroy);
+            if (GameEvents.OnCameraChange != null)
                 GameEvents.OnCameraChange.Remove(OnCameraChange);
+            if (GameEvents.onVesselGoOffRails != null)
                 GameEvents.onVesselGoOffRails.Remove(onVesselGoOffRails);
+            if (GameEvents.onVesselCrewWasModified != null)
                 GameEvents.onVesselCrewWasModified.Remove(OnVesselCrewModified);
+            if (DFGameEvents.onKerbalFrozen != null)
                 DFGameEvents.onKerbalFrozen.Remove(OnKerbalFreezeThaw);
+            if (DFGameEvents.onKerbalThaw != null)
                 DFGameEvents.onKerbalThaw.Remove(OnKerbalFreezeThaw);
+            if (GameEvents.onVesselSwitching != null)
                 GameEvents.onVesselSwitching.Remove(OnVesselSwitching);
                 if (onATPPodSettingChanged != null)
                 {
