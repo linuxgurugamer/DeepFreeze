@@ -188,6 +188,13 @@ namespace DF
                 if (DFInstalledMods.IsSystemHeatInstalled)
                 {
                     SystemHeatWrapper.InitSystemHeatWrapper();
+                    if (DeepFreeze.Instance.DFsettings.RegTempReqd) {
+                        DeepFreezer.HeatService = new SystemHeatService();
+                    }
+                } else {
+                  if (DeepFreeze.Instance.DFsettings.RegTempReqd) {
+                    DeepFreezer.HeatService = new StockHeatService();
+                  }
                 }
             }
             if (DFInstalledMods.IsRTInstalled)
