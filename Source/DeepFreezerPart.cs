@@ -50,6 +50,9 @@ namespace DF
         private Material External_Window_Material_Ice;
         private Animation External_Window_Occluder_Anim;
 
+        // always able to fall back to null heat service
+        internal static IHeatService HeatService = new NullHeatService();
+
         // EC and Temp Functions Vars
         private Random rnd = new Random();  // Random seed for Killing Kerbals when we run out of EC to keep the Freezer running.
 
@@ -638,17 +641,18 @@ namespace DF
                 {
                     CrntVslID = vessel.id;
                     CrntVslName = vessel.vesselName;
+                    double systemTempInKelvin = HeatService.GetSystemTemperature(this);
 
                     //Set the Part temperature in the partmenu
                     if (DeepFreeze.Instance.DFsettings.TempinKelvin)
                     {
                         Fields["CabinTemp"].guiUnits = Localizer.Format("#autoLOC_DF_00061"); //#autoLOC_DF_00061 = K
-                        CabinTemp = (float)part.temperature;
+                        CabinTemp = (float)systemTempInKelvin;
                     }
                     else
                     {
                         Fields["CabinTemp"].guiUnits = Localizer.Format("#autoLOC_DF_00070"); //#autoLOC_DF_00070 = C
-                        CabinTemp = RSTUtils.Utilities.KelvintoCelsius((float)part.temperature);
+                        CabinTemp = RSTUtils.Utilities.KelvintoCelsius((float)systemTempInKelvin);
                     }
 
                     // If RemoteTech installed set the connection status
@@ -1396,18 +1400,19 @@ namespace DF
             {
                 if (TotalFrozen > 0) //We have frozen Kerbals, generate and check heat
                 {
+                    double systemTempInKelvin = HeatService.GetSystemTemperature(this);
                     //Add Heat for equipment monitoring frozen kerbals
                     double heatamt = heatamtMonitoringFrznKerbals / 60.0f * timeperiod * TotalFrozen;
-                    if (heatamt > 0) part.AddThermalFlux(heatamt);
+                    if (heatamt > 0) HeatService.AddThermalFlux(this, heatamt);
                     RSTUtils.Utilities.Log_Debug("Added " + heatamt + " kW of heat for monitoring " + TotalFrozen + " frozen kerbals");
-                    if (part.temperature < DeepFreeze.Instance.DFsettings.RegTempMonitor)
+                    if (systemTempInKelvin < DeepFreeze.Instance.DFsettings.RegTempMonitor)
                     {
-                        RSTUtils.Utilities.Log_Debug("DeepFreezer Temperature check is good parttemp=" + part.temperature + ",MaxTemp=" + DeepFreeze.Instance.DFsettings.RegTempMonitor);
+                        RSTUtils.Utilities.Log_Debug("DeepFreezer Temperature check is good parttemp=" + systemTempInKelvin + ",MaxTemp=" + DeepFreeze.Instance.DFsettings.RegTempMonitor);
                         if (TempChkMsg != null) ScreenMessages.RemoveMessage(TempChkMsg);
                         _FrzrTmp = FrzrTmpStatus.OK;
                         tmpdeathCounter = currenttime;
                         // do warning if within 40 and 20 kelvin
-                        double tempdiff = DeepFreeze.Instance.DFsettings.RegTempMonitor - part.temperature;
+                        double tempdiff = DeepFreeze.Instance.DFsettings.RegTempMonitor - systemTempInKelvin;
                         if (tempdiff <= 40)
                         {
                             _FrzrTmp = FrzrTmpStatus.WARN;
@@ -1427,7 +1432,7 @@ namespace DF
                     else
                     {
                         // OVER TEMP I'm Melting!!!!
-                        Debug.Log("DeepFreezer Part Temp TOO HOT, Kerbals are going to melt parttemp=" + part.temperature);
+                        Debug.Log("DeepFreezer Part Temp TOO HOT, Kerbals are going to melt parttemp=" + systemTempInKelvin);
                         if (!partInfo.TempWarning)
                         {
                             if (TimeWarp.CurrentRateIndex > 1) RSTUtils.Utilities.stopWarp();
@@ -2028,10 +2033,7 @@ namespace DF
                         StoredCharge = StoredCharge + ChargeRate;
                         if (FreezeMsg != null) ScreenMessages.RemoveMessage(FreezeMsg);
                         FreezeMsg = ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00082", StoredCharge.ToString("######0"))); //#autoLOC_DF_00082 = \u0020Cryopod - Charging: <<1>>
-                        if (DeepFreeze.Instance.DFsettings.RegTempReqd)
-                        {
-                            part.AddThermalFlux(heatamtThawFreezeKerbal);
-                        }
+                        HeatService.AddThermalFlux(this, heatamtThawFreezeKerbal);
                         RSTUtils.Utilities.Log_Debug("DeepFreezer Drawing Charge StoredCharge =" + StoredCharge.ToString("0000.00") + " ChargeRequired =" + ChargeRequired);
                         if (StoredCharge >= ChargeRequired)
                         {
@@ -2243,13 +2245,11 @@ namespace DF
                     }
                     else // We have enough Glykerol
                     {
-                        if (DeepFreeze.Instance.DFsettings.RegTempReqd) // Temperature check is required
+                        // Temperature check will be with NullHeatService if not required (NullHeatService return 0 and 0 > x, for x >= 0 is always false)
+                        if ((float)HeatService.GetSystemTemperature(this) > DeepFreeze.Instance.DFsettings.RegTempFreeze)
                         {
-                            if ((float)part.temperature > DeepFreeze.Instance.DFsettings.RegTempFreeze)
-                            {
-                                ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00084", (DeepFreeze.Instance.DFsettings.TempinKelvin ? DeepFreeze.Instance.DFsettings.RegTempFreeze.ToString("######0") : (DeepFreeze.Instance.DFsettings.RegTempFreeze - 273.15d).ToString("######0")) + Fields["CabinTemp"].guiUnits), 5.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00084 = Cannot Freeze while Temperature greater than <<1>> 
-                                return;
-                            }
+                            ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00084", (DeepFreeze.Instance.DFsettings.TempinKelvin ? DeepFreeze.Instance.DFsettings.RegTempFreeze.ToString("######0") : (DeepFreeze.Instance.DFsettings.RegTempFreeze - 273.15d).ToString("######0")) + Fields["CabinTemp"].guiUnits), 5.0f, ScreenMessageStyle.UPPER_CENTER); //#autoLOC_DF_00084 = Cannot Freeze while Temperature greater than <<1>>
+                            return;
                         }
                         /*
                         if (DFInstalledMods.IsSMInstalled) // Check if Ship Manifest (SM) is installed?
@@ -2580,12 +2580,9 @@ namespace DF
                         }
                         StoredCharge = StoredCharge + ChargeRate;
                         if (ThawMsg != null) ScreenMessages.RemoveMessage(ThawMsg);
-                        ThawMsg = ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00095", StoredCharge.ToString("######0"))); //#autoLOC_DF_00095 = \u0020Cryopod - Charging:<<1>> 
+                        ThawMsg = ScreenMessages.PostScreenMessage(Localizer.Format("#autoLOC_DF_00095", StoredCharge.ToString("######0"))); //#autoLOC_DF_00095 = \u0020Cryopod - Charging:<<1>>
 
-                        if (DeepFreeze.Instance.DFsettings.RegTempReqd)
-                        {
-                            part.AddThermalFlux(heatamtThawFreezeKerbal);
-                        }
+                        HeatService.AddThermalFlux(this, heatamtThawFreezeKerbal);
                         if (StoredCharge >= ChargeRequired)
                         {
                             RSTUtils.Utilities.Log_Debug("Stored charge requirement met. Have EC");
@@ -3873,6 +3870,7 @@ namespace DF
                     }
                     //RSTUtils.Utilities.Log_Debug("DeepFreezer UpdateCounts end");
                 }
+                HeatService.UpdateHeatFlux(this);
             }
             catch (Exception ex)
             {

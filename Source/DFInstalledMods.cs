@@ -140,6 +140,14 @@ namespace DF
             }
         }
 
+        internal static bool IsSystemHeatInstalled
+        {
+            get
+            {
+                return IsModInstalled("SystemHeat");
+            }
+        }
+
         internal static bool IsModInstalled(string assemblyName)
         {
             ModInfo info = GetInfo(assemblyName);
